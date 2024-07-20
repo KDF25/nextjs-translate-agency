@@ -1,0 +1,162 @@
+.wrapper{
+  row-gap: 50px;
+  margin-bottom: 100px;
+  position: relative;
+
+  &::before{
+    content: "";
+    position: absolute;
+    top: -80px;
+    left: -70px;
+    width: 450px;
+    height: 250px;
+    background: url('./../../../public/spline-2.svg');
+    background-size: cover;
+    overflow: visible;
+    z-index: 1;
+  }
+
+  .title{
+    text-align: center;
+    color: var(--color-yellow);
+    font-size: 44px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 50px;
+  }
+
+  .content{
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    position: relative;
+
+    .image__wrapper{
+      position: absolute;
+  
+    }
+
+    .carousel{
+      overflow: hidden;
+      .card{
+        width: 80%;
+        height: 320px;  
+        border-radius: 50px;   
+        box-shadow: 0px 4px 16px rgba(56, 175, 241, 0.41);
+        padding: 25px 100px 25px 30px;
+        display: grid;
+        align-items: start;
+        justify-items: flex-start;
+        position: relative;
+        overflow: hidden;
+    
+    
+    
+        &.card_1{
+          background: #3289C7;
+          .texts{
+            p{
+              background: #FFCEB3;
+              color: rgba(0, 0, 0, 0.65);
+            }
+            span{
+              color: var(--color-white);
+            }
+          }
+        }
+    
+        &.card_2{
+          background: #D7F3FF;
+          .texts{
+            p{
+              background: #FF7A88;
+              color: var(--color-white);
+            }
+    
+            span{
+              color: rgba(0, 0, 0, 0.80);
+            }
+          }
+        }
+        &.card_3{
+          background: #5EBBEE;
+          .texts{
+            p{
+              background: #FFCD6C;
+              color:  var(--color-white);
+            }
+            span{
+              color: var(--color-white);
+            }
+          }
+        }
+        &.card_4{
+          background: #9BE9FF;
+          .texts{
+            p{
+              background:  var(--color-white);
+              color: rgba(9, 14, 33, 0.65);
+            }
+            span{
+              color: rgba(9, 14, 33, 0.65);
+            }
+          }
+        }
+        &.card_5{
+          background: #D8FDFF;
+          .texts{
+            p{
+              background: #2D92DC;
+              color: var(--color-white);
+            }
+            span{
+              color: rgba(0, 0, 0, 0.80);
+            }
+          }
+        }
+    
+        .texts{
+          display: grid;
+          grid-auto-flow: row;
+          row-gap: 20px;
+          align-items: start;
+          justify-items: flex-start;
+    
+          p{
+            padding: 10px;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            border-radius: 12px;
+          }
+    
+          span{
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+          }
+        }
+      }
+    }
+  }
+
+
+    .button{
+      display: grid;
+      justify-content: center;
+      align-items: center;
+
+      button{
+        border-radius: 40px;
+        background: var(--color-blue);
+        padding: 18px 50px;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        color: var(--color-white);
+      }
+    }
+  }

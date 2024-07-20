@@ -1,0 +1,134 @@
+.wrapper{
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 50px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    overflow-x: clip;
+
+    .title{
+        color: #FFCD6C;
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        padding-left: 100px;
+        position: relative;
+
+        &::before{
+            content: "";
+            position: absolute;
+            top: -100px;
+            right: -90px;
+            width: 600px;
+            height: 400px;
+            background: url('./../../../public/spline-1.svg');
+            background-size: cover;
+            z-index: -1; 
+        }
+    }
+
+    .information{
+        display: grid;
+        grid-auto-flow: row;
+        row-gap: 50px;
+
+        .tab__wrapper{
+            display: grid;
+            grid-template: 1fr / 1fr 1fr 1fr 1fr;
+            column-gap: 20px;
+
+            .tab{
+                display: grid;
+                justify-content: center;
+                align-items: start;
+                padding: 30px 40px 60px 40px;
+                border-radius: 50px;
+                box-shadow: 0px 4px 16px rgba(0, 150, 234, 0.31);
+                background: var(--color-white);
+
+                &.active{
+                    background: #C6EFFF;
+                }
+
+                &__content{
+                    display: grid;
+                    grid-auto-flow: row;
+                    row-gap: 35px;
+                    align-items: center;
+                    justify-content: center;
+                    justify-items: center;
+
+
+                    .icon{
+                        height: 70px;
+                        width: 70px;
+                        background: #FF7A88;
+                        border-radius: 50%;
+                    }
+
+                    p{
+                        color: #4D4D4D;
+                        text-align: center;
+                        font-size: 20px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+                    }
+                }
+            }
+        }
+
+        .content__wrapper{
+            display: grid;
+            grid-template: 1fr / 1fr 1fr;
+            column-gap: 20px;
+            align-items: center;
+            cursor: pointer;
+
+            .left{
+                display: grid;
+                grid-auto-flow: row;
+                row-gap: 50px;
+
+                .texts{
+                    display: grid;
+                    grid-auto-flow: row;
+                    row-gap: 30px;
+
+                    p{
+                        font-size: 24px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+                        color: var(--color-black);
+                    }
+
+                    span{
+                        color: #4D4D4D;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: normal;
+                    }
+                }
+
+                .order{
+                    border-radius: 40px;
+                    background: #FF7A88;
+                    padding: 15px 30px;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                    color: var(--color-white);
+                }
+            }
+
+            .right{
+                height: 316px;
+                background: #FF7A88;
+            }
+        }
+    }
+}

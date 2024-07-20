@@ -1,0 +1,42 @@
+:root{
+    /* colors */
+    --color-white: #fff;
+    --color-black: black;
+    --color-blue: #0096EA;
+    --color-yellow: #FFCD6C;
+    --language-active: #67D2FB;
+
+
+
+        /* Breakpoint constants */
+    --breakpoint-xl: 1344px; /* Extra Large */
+    --breakpoint-lg: 992px; /* Large */
+    --breakpoint-md: 768px; /* Medium */
+    --breakpoint-xs: 376px; /* Extra Small */
+
+    /* Контейнерные отступы */
+    /* Контейнерные отступы для Extra Large */
+    --container-padding-xl-all: 15px;
+    --container-padding-xl-side: 50px;
+    --container-padding-xl-top: 80px;
+
+    /* Контейнерные отступы для Large */
+    --container-padding-lg-all: 12px;
+    --container-padding-lg-side: 40px;
+    --container-padding-lg-top: 70px;
+
+    /* Контейнерные отступы для Medium */
+    --container-padding-md-all: 10px;
+    --container-padding-md-side: 25px;
+    --container-padding-md-top: 60px;
+
+    /* Контейнерные отступы для Extra Small */
+    --container-padding-xs-all: 5px;
+    --container-padding-xs-side: 10px;
+    --container-padding-xs-top: 40px;
+
+    --header-height-xl: 70px;
+    --header-height-lg: 70px;
+    --header-height-md: 72px;
+    --header-height-xs: 56px;
+}
