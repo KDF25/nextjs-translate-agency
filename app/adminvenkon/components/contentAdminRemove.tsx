@@ -1,8 +1,9 @@
 "use client";
 
-import { deleteBlock, getRevalidate } from "@/services/admin";
+import { deleteBlock } from "@/services/admin";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import styles from "../styles/AuthAdmin.module.scss";
 
 interface ContentAdminRemoveProps {
   blockId: number;
@@ -11,45 +12,39 @@ interface ContentAdminRemoveProps {
 
 export default function ContentAdminRemove({
   blockId,
-  pageId
+  pageId,
 }: ContentAdminRemoveProps) {
   const [isDelete, setIsDelete] = useState(false);
   const router = useRouter();
 
   const handleDelete = () => {
     deleteBlock(blockId);
-    getRevalidate(pageId === 2 ? "/ru" : "/ru/whyvenkoncommunications");
-    getRevalidate(pageId === 2 ? "/en" : "/en/whyvenkoncommunications");
-    getRevalidate(pageId === 2 ? "/uz" : "/uz/whyvenkoncommunications");
     router.push("/adminvenkon");
   };
 
   return (
-    <div style={{ color: "red", fontWeight: "500", margin: "10px 0px" }}>
+    <div>
       {isDelete ? (
-        <div>
+        <div className={styles.admin__wrapper__change}>
           <div>
             Вы уверены что хотите удалить блок? Это действие необратимое.
           </div>
           <div>
-            <button
-              style={{
-                color: "red",
-                fontWeight: "500",
-                padding: "1%",
-                margin: "5px 0px",
-              }}
-              onClick={handleDelete}
-            >
+            <button className={styles.removeBtn} onClick={handleDelete}>
               Да, удалить блок безвозвратно
             </button>
           </div>
           <div>
-            <button onClick={() => setIsDelete(false)}>Нет, назад</button>
+            <button
+              className={styles.backBtn}
+              onClick={() => setIsDelete(false)}
+            >
+              Нет, назад
+            </button>
           </div>
         </div>
       ) : (
-        <button style={{ color: "red" }} onClick={() => setIsDelete(true)}>
+        <button className={styles.removeBtn} onClick={() => setIsDelete(true)}>
           Удалить этот блок
         </button>
       )}

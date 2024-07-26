@@ -2,51 +2,40 @@
 
 import { languageEnum } from "@/app/i18n/settings";
 import {
-  getRevalidate,
   putContentAlt,
   putContentFile,
   putContentText,
 } from "@/services/admin";
+import { IBlock } from "@/types/user";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import styles from "../styles/AuthAdmin.module.scss";
 
 interface ContentAdminEditProps {
-  block: {
-    texts: { id: number; text: string }[];
-    files: { id: number; alts: { id: number; text: string }[] }[];
-  };
+  block: IBlock;
   pageId: number;
   lng: languageEnum;
 }
-const ContentAdminEdit: React.FC<ContentAdminEditProps> = ({ block, lng, pageId }) => {
+const ContentAdminEdit: React.FC<ContentAdminEditProps> = ({
+  block,
+  lng,
+  pageId,
+}) => {
   const [isChange, setIsChange] = useState(false);
   const [fileStates, setFileStates] = useState<{
     fileId: number;
     formData: FormData;
   } | null>(null);
-  const [altStates, setAltStates] = useState<
-    { fileId: number; altId: number; text: string }[]
-  >([]);
+
+  const [altStates, setAltStates] = useState<{ id: number; text: string }[]>(
+    []
+  );
+
   const [textStates, setTextStates] = useState<{ id: number; text: string }[]>(
     []
   );
+
   const router = useRouter();
-
-  const updateTextStateById = (id: number, newText: string) => {
-    setTextStates((prevTextStates) =>
-      prevTextStates.map((textState) =>
-        textState.id === id ? { ...textState, text: newText } : textState
-      )
-    );
-  };
-
-  const updateAltStateById = (id: number, newAlt: string) => {
-    setAltStates((prevAltStates) =>
-      prevAltStates.map((altState) =>
-        altState.altId === id ? { ...altState, text: newAlt } : altState
-      )
-    );
-  };
 
   const handleChangeFile = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -62,8 +51,13 @@ const ContentAdminEdit: React.FC<ContentAdminEditProps> = ({ block, lng, pageId 
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const newText = event.target.value;
-    const id = textStates[index].id;
-    updateTextStateById(id, newText);
+    const newTextStates = textStates.map((item) => {
+      if (item.id === index) {
+        return { ...item, text: newText };
+      }
+      return item;
+    });
+    setTextStates(newTextStates);
   };
 
   const handleChangeAlt = (
@@ -71,153 +65,125 @@ const ContentAdminEdit: React.FC<ContentAdminEditProps> = ({ block, lng, pageId 
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const newAlt = event.target.value;
-    const id = block.files[index].alts[0].id;
-    updateAltStateById(id, newAlt);
+    const newAltStates = altStates.map((item) => {
+      if (item.id === index) {
+        return { ...item, text: newAlt };
+      }
+      return item;
+    });
+    setAltStates(newAltStates);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (fileStates) {
       putContentFile(fileStates.fileId, fileStates.formData);
-      putContentAlt(altStates[0].fileId, altStates[0].text, lng);
     }
-    if (block.texts[0]?.id) {
-      textStates.forEach((text) => {
-        putContentText(text.id, text.text);
-      });
+    if (block?.texts[0]?.text) {
+      const texts = block?.texts.map((item) => ({
+        id: item.id,
+        text: item.text,
+      }));
+      const alts = block?.files[0]?.alts.map((item) => ({
+        id: item.id,
+        text: item.text,
+      }));
+
+      const areTextsEqual =
+        JSON.stringify(texts) === JSON.stringify(textStates);
+      const areAltsEqual = JSON.stringify(alts) === JSON.stringify(altStates);
+      if (!areTextsEqual) {
+        putContentText(textStates);
+      }
+      if (!areAltsEqual) {
+        putContentAlt(altStates);
+      }
     }
-    getRevalidate(pageId === 2 ? "/ru" : "/ru/whyvenkoncommunications");
-    getRevalidate(pageId === 2 ? "/en" : "/en/whyvenkoncommunications");
-    getRevalidate(pageId === 2 ? "/uz" : "/uz/whyvenkoncommunications");
     router.push("/adminvenkon");
   };
 
   useEffect(() => {
-    if (block?.texts[0]?.id) {
-      const initialTextStates = block.texts.map((text) => ({
-        id: text.id,
-        text: text.text,
+    if (block?.texts[0]?.text) {
+      const texts = block?.texts.map((item) => ({
+        id: item.id,
+        text: item.text,
       }));
-      setTextStates(initialTextStates);
+      setTextStates(texts);
     }
     if (block?.files[0]?.id) {
       const initialAltStates = block.files.map((file) => ({
-        fileId: file.id,
-        altId: file.alts[0].id,
+        id: file.alts[0].id,
         text: file.alts[0].text,
       }));
       setAltStates(initialAltStates);
     }
   }, [block]);
-
   return (
     <div>
       {isChange ? (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <form
-            onSubmit={handleSubmit}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              padding: "3%",
-              border: "0.5px solid #999999",
-              borderRadius: "10px",
-              margin: "10px",
-            }}
-          >
+        <div className={styles.admin__wrapper__change}>
+          <form className={styles.admin__wrapper} onSubmit={handleSubmit}>
             {block?.files[0]?.id &&
               block?.files.map((file, index) => (
-                <div key={file.id}>
-                  <label
-                    style={{
-                      marginBottom: "10px",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <span style={{ fontWeight: "500", marginBottom: "10px" }}>
-                      Edit file:
-                    </span>
+                <div
+                  key={file.id}
+                  style={{
+                    display: "grid",
+                    gridTemplate: "1fr 1fr / 1fr",
+                    rowGap: "20px",
+                  }}
+                >
+                  <label>
+                    <span>Edit file:</span>
                     <input
                       type="file"
                       onChange={(event) => handleChangeFile(event, file.id)}
-                      style={{
-                        padding: "10px",
-                        borderRadius: "15px",
-                        border: "0.5px solid #606060",
-                      }}
                     />
                   </label>
-                  <label
-                    style={{
-                      marginBottom: "10px",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <span style={{ fontWeight: "500", marginBottom: "5px" }}>
-                      Edit alt for image:
-                    </span>
+                  <label>
+                    <span>Edit alt for image:</span>
                     <input
                       type="text"
                       value={altStates[index]?.text || ""}
-                      onChange={(event) => handleChangeAlt(index, event)}
-                      style={{
-                        padding: "10px",
-                        borderRadius: "15px",
-                        border: "0.5px solid #606060",
-                      }}
+                      onChange={(event) =>
+                        handleChangeAlt(altStates[index]?.id, event)
+                      }
                     />
                   </label>
                 </div>
               ))}
-            {block?.texts[0]?.id &&
-              block?.texts.map((text, index) => (
-                <label
-                  key={text.id}
-                  style={{
-                    marginBottom: "10px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <span style={{ fontWeight: "500", marginBottom: "5px" }}>
-                    Edit text:
-                  </span>
-                  <input
-                    type="text"
-                    value={textStates[index]?.text || ""}
-                    onChange={(event) => handleChangeText(index, event)}
-                    style={{
-                      padding: "10px",
-                      borderRadius: "15px",
-                      border: "0.5px solid #606060",
-                    }}
-                  />
-                </label>
-              ))}
-            <input type="submit" value="Сохранить изменения" />
+            {block?.texts[0]?.text &&
+              block?.texts.map(
+                (text, index) => (
+                  console.log(textStates, textStates[index]?.text),
+                  (
+                    <label key={index}>
+                      <span>Edit text: {index + 1}</span>
+                      <input
+                        type="text"
+                        value={textStates[index]?.text || ""}
+                        onChange={(event) =>
+                          handleChangeText(textStates[index]?.id, event)
+                        }
+                      />
+                    </label>
+                  )
+                )
+              )}
+            <input
+              className={styles.changeBtn}
+              type="submit"
+              value="Сохранить изменения"
+            />
           </form>
-          <button onClick={() => setIsChange(false)}>Назад</button>
+          <button className={styles.backBtn} onClick={() => setIsChange(false)}>
+            Назад
+          </button>
         </div>
       ) : (
         <div>
           <button
+            className={styles.changeBtn}
             onClick={() => {
               setIsChange(true);
             }}
@@ -228,6 +194,6 @@ const ContentAdminEdit: React.FC<ContentAdminEditProps> = ({ block, lng, pageId 
       )}
     </div>
   );
-}
+};
 
-export default ContentAdminEdit
+export default ContentAdminEdit;

@@ -2,8 +2,10 @@
 
 import { ILangPageProps } from "@/types/user";
 import { useEffect, useState } from "react";
-import { GrClose } from "react-icons/gr";
+import { CloseBurgerIcon, OpenBurgerIcon } from "../../icons";
 import BurgerLanguage from "./burgerLanguage";
+import BurgerNavigation from "./burgerNavigation";
+import "./../../styles/Header.module.scss";
 
 const Burger: React.FC<ILangPageProps> = ({ lng }) => {
   const [showBurger, setShowBurger] = useState<boolean>(false);
@@ -30,7 +32,7 @@ const Burger: React.FC<ILangPageProps> = ({ lng }) => {
     <div>
       <div className="burger">
         <div className="burger-btn" onClick={handleBurger}>
-          <span />
+          <OpenBurgerIcon />
         </div>
         <div className={showBurger ? "burger-body active" : "burger-body"}>
           <div className="burger-wrapper">
@@ -40,12 +42,14 @@ const Burger: React.FC<ILangPageProps> = ({ lng }) => {
                 alignSelf: "end",
               }}
             >
-              <GrClose className="burger-hide-btn" onClick={handleBurger} />
+              <div className="burger-hide-btn" onClick={handleBurger}>
+                <CloseBurgerIcon />
+              </div>
             </div>
-            <div className="burger-language">
+            <div className="burger__content">
+              <BurgerNavigation lng={lng} />
               <BurgerLanguage lng={lng} />
             </div>
-
           </div>
         </div>
       </div>

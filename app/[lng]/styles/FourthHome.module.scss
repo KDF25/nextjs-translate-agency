@@ -1,8 +1,8 @@
 .wrapper{
   // display: grid;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
+  // justify-content: center;
+  // align-items: center;
+  // align-content: center;
   margin-top: 200px;
   margin-bottom: 250px;
   position: relative;
@@ -14,14 +14,49 @@
     top: -50px;
     left: 0;
     width: 100%;
-    height: 965px;
+    // height: 965px;
+    height: -webkit-fill-available;
     background: url('./../../../public/background-2.svg');
     background-size: cover;
     z-index: -1; 
+    
+    @media (max-width: 992px) {
+      background: url('./../../../public/background-2-2.svg');
+      background-size: cover;
+    }
+    
+    @media (max-width: 768px) {
+      background: url('./../../../public/background-2-3.svg');
+      background-size: cover;
+    }
+  }
+.player__wrapper{
+  position: relative;
+
+  .admin{
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .player{
+    width: 675px !important;
+    height: 575px !important;
+
+    @media (max-width: 992px) {
+        width: 556px !important;
+        height: 446px !important;
+    }
+
+    @media (max-width: 768px) {
+      width: 556px !important;
+      height: 446px !important;
+  }
+    @media (max-width: 375px) {
+      width: 280px !important;
+      height: 238px !important;
+  }
   }
 }
+}
 
-// .swipper__wrapper {
-//   display: grid;
-//   grid-auto-flow: column;
-// }

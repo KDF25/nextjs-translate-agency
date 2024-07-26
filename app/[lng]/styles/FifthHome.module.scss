@@ -2,7 +2,6 @@
   display: grid;
   grid-auto-flow: row;
   row-gap: 30px;
-  justify-items: center;
   margin-bottom: 100px;
   position: relative;
 
@@ -28,7 +27,6 @@
   }
 
   .form__wrapper{
-    width: 30vw;
     border-radius: 30px;
     background: var(--color-white);
     box-shadow: 0px 2px 21px 0px rgba(3, 122, 142, 0.21);

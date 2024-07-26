@@ -1,28 +1,52 @@
-import { IHomePageProps } from "@/types/user";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import styles from "../styles/SeventhHome.module.scss";
-import { useTranslation } from "@/app/i18n";
-import Image from "next/image";
-import { scrollEnum } from "@/types/constansts";
+"use client";
 
-const SeventhHome: React.FC<IHomePageProps> = async ({
+import ContentAdminEdit from "@/app/adminvenkon/components/contentAdminEdit";
+import { useTranslation } from "@/app/i18n/client";
+import { scrollEnum } from "@/types/constansts";
+import { IHomePageProps } from "@/types/user";
+import Image from "next/image";
+import { useMediaQuery } from "react-responsive";
+import { Pagination } from "swiper";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
+import styles from "../styles/SeventhHome.module.scss";
+
+const SeventhHome: React.FC<IHomePageProps> = ({
   section,
   isAdmin,
   pageId,
   lng,
 }) => {
-  const { t } = await useTranslation(lng);
+  const { t } = useTranslation(lng);
+  const firstBlock = section?.blocks[0];
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
   return (
-    <section id={scrollEnum.clients} className={`${styles.wrapper} container`}>
+    <div id={scrollEnum.clients} className={`${styles.wrapper} container`}>
       <div className={styles.top}>
         <h2 className={styles.title}>{t("HomePage.SeventhHome.title")}</h2>
-        <div className={styles.image}></div>
+        <div className={styles.image__wrapper}>
+          <Image
+            src={firstBlock?.files[0]?.url}
+            alt={firstBlock?.files[0]?.alts[0]?.text}
+            width={525}
+            height={480}
+            priority
+          />
+        </div>
+        {isAdmin && pageId && (
+          <>
+            <div></div>
+            <div className="admin__change">
+              <ContentAdminEdit block={firstBlock} pageId={pageId} lng={lng} />
+            </div>
+          </>
+        )}
       </div>
       <div className={styles.bottom}>
-        {section?.blocks.map((block, index) => (
-          <div className={styles.partners} key={index}>
+        {section?.blocks.slice(1).map((block, index) => (
+          <div className={styles.partner} key={index}>
             <Image
               className={styles.image}
               src={block?.files[0]?.url}
@@ -31,24 +55,47 @@ const SeventhHome: React.FC<IHomePageProps> = async ({
               height={150}
               priority
             />
+            {isAdmin && pageId && (
+              <div>
+                <ContentAdminEdit block={block} pageId={pageId} lng={lng} />
+              </div>
+            )}
           </div>
         ))}
       </div>
-
-      {/* {isAdmin && pageId && (
-              <div>
-                <ContentAdminEdit block={block} pageId={pageId} lng={lng} />
-                <ContentAdminRemove blockId={block.id} pageId={pageId} />
-              </div>
-            )}
-      {isAdmin && pageId && (
-        <ContentAdminAdd
-          block={section?.blocks[0]}
-          sectionId={section?.id}
-          pageId={pageId}
-        />
-      )} */}
-    </section>
+      <div className={styles.carousel}>
+        <Swiper
+          slidesPerView={1}
+          loop={true}
+          modules={[Pagination]}
+          speed={500}
+          centeredSlides={true}
+          className={`parthers`}
+          spaceBetween={100}
+          pagination={{
+            type: "bullets",
+          }}
+        >
+          {section?.blocks?.slice(1).map((block, index) => (
+            <SwiperSlide key={index} className={styles.partner}>
+              <Image
+                className={styles.image}
+                src={block?.files[0]?.url}
+                alt={block?.files[0]?.alts[0]?.text}
+                width={300}
+                height={150}
+                priority
+              />
+              {isAdmin && pageId && (
+                <div>
+                  <ContentAdminEdit block={block} pageId={pageId} lng={lng} />
+                </div>
+              )}
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    </div>
   );
 };
 

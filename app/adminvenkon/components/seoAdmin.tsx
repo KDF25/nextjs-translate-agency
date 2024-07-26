@@ -2,19 +2,18 @@
 
 import { languageEnum } from "@/app/i18n/settings";
 import { putPageSeo } from "@/services/admin";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import styles from "../styles/AuthAdmin.module.scss";
+import { IUserData } from "@/types/user";
 
 interface SeoAdminProps {
-  seo: {
-    seo_title: string;
-    seo_description: string;
-    seo_keywords: string;
-  };
+  seo: IUserData;
   lng: languageEnum;
-  pageId: number;
+  seoId: number;
 }
 
-export default function SeoAdmin({ seo, lng, pageId }: SeoAdminProps) {
+export default function SeoAdmin({ seo, lng, seoId }: SeoAdminProps) {
   const [isChange, setIsChange] = useState(false);
   const [title, setTitle] = useState<string | null>(seo?.seo_title || null);
   const [description, setDescription] = useState<string | null>(
@@ -37,107 +36,49 @@ export default function SeoAdmin({ seo, lng, pageId }: SeoAdminProps) {
   const handleChangeKeywords = (event: React.ChangeEvent<HTMLInputElement>) => {
     setKeywords(event.target.value);
   };
+  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    putPageSeo(pageId, lng, title!, description!, keywords!); // Asserting non-null since inputs are initially null
+    putPageSeo(seoId, title!, description!, keywords!);
     setIsChange(false);
     setTitle(null);
     setDescription(null);
     setKeywords(null);
+    router.push("/adminvenkon");
   };
 
   return (
-    <div style={{ marginBottom: "20px" }}>
+    <div>
       {isChange ? (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <form
-            onSubmit={handleSubmit}
-            style={{
-              marginBottom: "10px",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <label
-              style={{
-                marginBottom: "10px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <span style={{ fontWeight: "500", marginBottom: "10px" }}>
-                Title {lng}:{" "}
-              </span>
+        <div className={styles.admin__wrapper__change}>
+          <form onSubmit={handleSubmit} className={styles.admin__wrapper}>
+            <label>
+              <span>Title {lng}: </span>
               <input
-                style={{
-                  padding: "10px",
-                  borderRadius: "15px",
-                  border: "0.5px solid #606060",
-                }}
                 type="text"
                 value={title || ""}
                 onChange={handleChangeTitle}
               />
             </label>
-            <label
-              style={{
-                marginBottom: "10px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <span style={{ fontWeight: "500", marginBottom: "10px" }}>
-                Description {lng}:{" "}
-              </span>
+            <label>
+              <span>Description {lng}: </span>
               <input
-                style={{
-                  padding: "10px",
-                  borderRadius: "15px",
-                  border: "0.5px solid #606060",
-                }}
                 type="text"
                 value={description || ""}
                 onChange={handleChangeDescription}
               />
             </label>
-            <label
-              style={{
-                marginBottom: "10px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <span style={{ fontWeight: "500", marginBottom: "10px" }}>
-                Keywords {lng}:{" "}
-              </span>
+            <label>
+              <span>Keywords {lng}: </span>
               <input
-                style={{
-                  padding: "10px",
-                  borderRadius: "15px",
-                  border: "0.5px solid #606060",
-                }}
                 type="text"
                 value={keywords || ""}
                 onChange={handleChangeKeywords}
               />
             </label>
             <input
+              className={styles.changeBtn}
               type="submit"
               value="Отправить"
               disabled={
@@ -145,26 +86,32 @@ export default function SeoAdmin({ seo, lng, pageId }: SeoAdminProps) {
               }
             />
           </form>
-          <button onClick={() => setIsChange(false)}>Назад</button>
+          <button className={styles.backBtn} onClick={() => setIsChange(false)}>
+            Назад
+          </button>
         </div>
       ) : (
-        <div style={{ marginBottom: "20px" }}>
-          <div>
-            <div style={{ marginBottom: "10px" }}>
-              <span style={{ fontWeight: "700" }}>Title: </span>{" "}
-              {seo?.seo_title}
+        <div className={styles.seo__wrapper}>
+          <div className={styles.texts}>
+            <div className={styles.text}>
+              <p>Title: </p> <span>{seo?.seo_title}</span>
             </div>
-            <div style={{ marginBottom: "10px", fontWeight: "500" }}>
-              <span style={{ fontWeight: "700" }}>Description: </span>
-              {seo?.seo_description}
+            <div className={styles.text}>
+              <p>Description: </p>
+              <span>{seo?.seo_description}</span>
             </div>
-            <div style={{ marginBottom: "10px", fontWeight: "400" }}>
-              <span style={{ fontWeight: "700" }}>Keywords: </span>
-              {seo?.seo_keywords}
+            <div className={styles.text}>
+              <p>Keywords: </p>
+              <span>{seo?.seo_keywords}</span>
             </div>
           </div>
           <div>
-            <button onClick={() => setIsChange(true)}>Изменить</button>
+            <button
+              className={styles.changeBtn}
+              onClick={() => setIsChange(true)}
+            >
+              Изменить
+            </button>
           </div>
         </div>
       )}

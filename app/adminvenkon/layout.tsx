@@ -1,8 +1,13 @@
 "use client";
 
-import { FC, useEffect, useState } from "react";
-import { AdminLayoutProps, AuthContext } from "./context";
 import { useRouter } from "next/navigation";
+import { FC, ReactNode, useEffect, useState } from "react";
+import "../styles/global.scss";
+import { AuthContext } from "./context";
+
+export type AdminLayoutProps = {
+  children: ReactNode; 
+};
 
 const AdminLayout: FC<AdminLayoutProps> = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
@@ -26,19 +31,17 @@ const AdminLayout: FC<AdminLayoutProps> = ({ children }) => {
   return (
     <>
       <html>
-        <body className="wrapper">
+        <body>
           <AuthContext.Provider value={{ isAuth, handleIsAuth }}>
-            <main className="my-container">
+            <main>
               <div>
                 {isAuth && (
-                  <div
-                    style={{
-                      margin: "10px 0px 20px 0px",
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <button onClick={() => closeAdmin()}>Выход</button>
+                  <div className="container">
+                    <div className="admin__exit__wrapper">
+                      <button className="exit" onClick={() => closeAdmin()}>
+                        Выход
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>

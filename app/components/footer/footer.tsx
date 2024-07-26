@@ -1,9 +1,10 @@
 import { ILangPageProps } from "@/types/user";
-import styles from "../styles/Footer.module.scss";
-import React from "react";
-import TheNavigation from "./navigation";
-import TheContacts from "./contacts";
 import Image from "next/image";
+import React from "react";
+import styles from "../styles/Footer.module.scss";
+import logo from "./../icons/logo.png";
+import TheContacts from "./contacts";
+import TheNavigation from "./navigation";
 
 const TheFooter: React.FC<ILangPageProps> = ({ lng }) => {
   return (
@@ -12,9 +13,8 @@ const TheFooter: React.FC<ILangPageProps> = ({ lng }) => {
         <div className={styles.top}>
           <div className={styles.logo}>
             <Image
-              src="/logo.svg"
+              src={logo}
               alt="логотип Translate Agency"
-              // className="logo-header"
               width={200}
               height={100}
             />
@@ -31,3 +31,4 @@ const TheFooter: React.FC<ILangPageProps> = ({ lng }) => {
 };
 
 export { TheFooter };
+

@@ -1,20 +1,17 @@
-import qs from "qs";
+import { languageEnum, languages } from "@/app/i18n/settings";
 import { $authHost, $host } from "./index";
-import axios from "axios";
+import qs from "qs";
+import { IText } from "@/types/user";
 
 export const Auth = async (username: string, password: string) => {
   try {
     const { data } = await $host.post(
       "/translation/api/authentication/token",
-     {
+     ({
         username: username,
         password: password,
-      }
+      })
     );
-    // const data = {
-    //   "type": "Bearer",
-    //   "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjE1NDU1MzUsImlhdCI6MTcyMTQ1OTEzNSwic2NvcGUiOlsiQWRtaW4iXSwic3ViIjoiYWRtaW4ifQ.cXD6aH-orKANvEFpVYvBGDG7_JGLKhdGStVzLZqQxLs"
-    // }
     localStorage.setItem("token", data.access_token);
     localStorage.setItem("isAuth", "true");
     return data;
@@ -25,58 +22,27 @@ export const Auth = async (username: string, password: string) => {
   }
 };
 
-
-// export const Auth = async (username: string, password: string) => {
-//   try {
-//     const response = await axios.post<any>(
-//       'http://167.172.186.13:5000/translation/api/authentication/token',
-//       qs.stringify({
-//         username: `${username}`,
-//         password: `${password}`,
-//       }),
-//       {
-//         headers: {
-//           'accept': 'application/json',
-//           'Content-Type': 'application/json',
-//         },
-//       }
-//     );
-//     console.log('Token:', response.data.token);
-//   } catch (error) {
-//     if (axios.isAxiosError(error)) {
-//       console.error('Error message:', error.message);
-//       // Дополнительная информация об ошибке, если есть
-//     } else {
-//       console.error('Unexpected error:', error);
-//     }
-//   }
-// };
-
-export const putPageSeo = async (pageId: number, lng:string, title:string, description:string, keywords:string) => {
+export const putPageSeo = async (seoId: number, title:string, description:string, keywords:string) => {
   try {
-    const { data } = await $authHost.put(`/translation/admin/edit/seo`, {
-      page_id: pageId,
-      seo: [
-        {
-          language: lng,
-          title: title,
-          description: description,
-          keywords: keywords,
-        },
-      ],
-    });
+    const { data } = await $authHost.put(`/translation/api/page/seo`, [{
+      id: seoId,
+      title: title,
+      description: description,
+      keywords: keywords,
+    }]);
     return data;
   } catch (error) {
     alert(`Ошибка... ${error}`);
   }
 };
 
-export const putContentText = async (id: number, text: string) => {
+export const putContentText = async ( text: {
+  id: number
+  text: string,
+}[]) => {
   try {
-    const { data } = await $authHost.put("/translation/admin/edit/text", {
-      text_id: id,
-      text: text,
-    });
+    const { data } = await $authHost.put("/page/block/text",  text
+  );
     return data;
   } catch (error) {
     alert(`Ошибка... ${error}`);
@@ -86,8 +52,13 @@ export const putContentText = async (id: number, text: string) => {
 export const putContentFile = async (id: number, formData: FormData) => {
   try {
     const { data } = await $authHost.put(
-      `/translation/admin/edit/file?file_id=${id}`,
-      formData
+      `/translation/api/page/block/file?file_id=${id}`,
+      formData,
+     {
+       headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      }
+    }
     );
     return data;
   } catch (error) {
@@ -95,17 +66,12 @@ export const putContentFile = async (id: number, formData: FormData) => {
   }
 };
 
-export const putContentAlt = async (fileId: number, text: string, lng: string) => {
+export const putContentAlt = async (alt: {
+  id: number
+  text: string,
+}[]) => {
   try {
-    const { data } = await $authHost.put("/translation/admin/edit/alt", {
-      file_id: fileId,
-      alt: [
-        {
-          text: text,
-          language: lng,
-        },
-      ],
-    });
+    const { data } = await $authHost.put("/translation/api/page/block/file/alt", alt);
     return data;
   } catch (error) {
     alert(`Ошибка... ${error}`);
@@ -114,7 +80,7 @@ export const putContentAlt = async (fileId: number, text: string, lng: string) =
 
 export const addBlock = async (sectionId: number, textRu?: string, textUz?: string, textEn?: string) => {
   try {
-    const { data } = await $authHost.post("/translation/admin/create/block", {
+    const { data } = await $authHost.post("/translation/api/page/block", {
       section_id: sectionId,
       name: "admin's block",
       text: [
@@ -141,8 +107,13 @@ export const addBlock = async (sectionId: number, textRu?: string, textUz?: stri
 export const addFile = async (blockId: number, formData: FormData) => {
   try {
     const { data } = await $authHost.post(
-      `/translation/admin/add/file?block_id=${blockId}`,
-      formData
+      `/translation/api/page/block/file?block_id=${blockId}`,
+      formData,
+      {
+        headers: {
+         'Content-Type': 'application/x-www-form-urlencoded',
+       }
+     }
     );
     formData.delete("file");
     return data;
@@ -151,24 +122,11 @@ export const addFile = async (blockId: number, formData: FormData) => {
   }
 };
 
-export const addAlt = async (fileId: number, textRu: string, textUz: string, textEn: string) => {
+export const addAlt = async (fileId: number, alt: {language: string, text: string}[]) => {
   try {
-    const { data } = await $authHost.post("/translation/admin/add/alt", {
+    const { data } = await $authHost.post("/translation/api/page/block/file/alt", {
       file_id: fileId,
-      alt: [
-        {
-          text: textRu,
-          language: "ru",
-        },
-        {
-          text: textUz,
-          language: "uz",
-        },
-        {
-          text: textEn,
-          language: "en",
-        },
-      ],
+      alt: alt
     });
     return data;
   } catch (error) {
@@ -176,24 +134,11 @@ export const addAlt = async (fileId: number, textRu: string, textUz: string, tex
   }
 };
 
-export const addText = async (blockId: number, textRu: string, textUz: string, textEn: string) => {
+export const addText = async (blockId: number, texts: IText[]) => {
   try {
-    const { data } = await $authHost.post("/translation/admin/add/text", {
+    const { data } = await $authHost.post("/translation/api/page/block/text", {
       block_id: blockId,
-      text: [
-        {
-          text: textRu,
-          language: "ru",
-        },
-        {
-          text: textUz,
-          language: "uz",
-        },
-        {
-          text: textEn,
-          language: "en",
-        },
-      ],
+      text: texts
     });
     return data;
   } catch (error) {
@@ -204,7 +149,7 @@ export const addText = async (blockId: number, textRu: string, textUz: string, t
 export const deleteBlock = async (blockId: number) => {
   try {
     const { data } = await $authHost.delete(
-      `/translation/admin/remove/block?block_id=${blockId}`
+      `/translation/api/page/block?block_id=${blockId}`
     );
     return data;
   } catch (error) {

@@ -2,6 +2,7 @@ import { languageEnum } from "@/app/i18n/settings";
 
 export interface IUserData {
     id: number;
+    seo_id: number;
     name: string;
     seo_title: string;
     seo_description: string;
@@ -34,9 +35,10 @@ export  interface IBlock {
     text: string;
   }
   
-  interface IText {
+  export interface IText {
     id: number;
     text: string;
+    language?: string;
   }
   
 

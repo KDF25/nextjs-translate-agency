@@ -7,7 +7,7 @@ import FifthHome from "./components/fifthHome";
 import SixthHome from "./components/sixthHome";
 import SeventhHome from "./components/seventhHome";
 import { ILangPageProps } from "@/types/user";
-import { DATA } from "@/config/mockData";
+import { PAGE_ID } from "@/config";
 
 export async function generateMetadata({
   params: { lng },
@@ -28,29 +28,17 @@ export default async function Home({
 }: {
   params: ILangPageProps;
 }) {
-  const pageId = 2;
-  // const response = await getData(pageId, lng);
-  const response = DATA;
-  const Sections = [
-    FirstHome,
-    SecondHome,
-    ThirdHome,
-    // FourthHome,
-    // FifthHome,
-    // SixthHome,
-    // SeventhHome,
-  ];
+  const response = await getData(PAGE_ID, lng);
 
   return (
     <>
       <FirstHome section={response?.sections[0]} lng={lng} />
       <SecondHome section={response?.sections[1]} lng={lng} />
       <ThirdHome section={response?.sections[2]} lng={lng} />
-      <FourthHome />
+      <FourthHome section={response?.sections[3]} lng={lng} />
       <FifthHome lng={lng} />
       <SixthHome lng={lng} />
-      <SeventhHome section={response?.sections[3]} lng={lng} />
-      <div>{/* <EighthHome lng={lng} /> */}</div>
+      <SeventhHome section={response?.sections[4]} lng={lng} />
     </>
   );
 }

@@ -6,8 +6,8 @@ import { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import Head from "next/head";
 import { ReactNode } from "react";
-import "../styles/global.scss";
 import { languages } from "../i18n/settings";
+import "../styles/global.scss";
 
 export const metadata: Metadata = {
   title: "Venkon Communications",

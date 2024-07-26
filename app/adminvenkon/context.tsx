@@ -1,9 +1,4 @@
-import { createContext, ReactNode } from "react";
-
-// Определение типа для пропсов компонента AdminLayout
-export type AdminLayoutProps = {
-  children: ReactNode; // children должны быть типом ReactNode
-};
+import { createContext } from "react";
 
 // Определение типа для контекста аутентификации
 export type AuthContextType = {

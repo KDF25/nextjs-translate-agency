@@ -34,6 +34,10 @@
     column-gap: 60px;
     color: var(--color-white);
 
+    @media (max-width: 768px) {
+        display: none;
+    }
+
     .tab{
         cursor: pointer;
     }
@@ -60,13 +64,28 @@
     font-weight: 400;
     line-height: normal;
 
+    &.header{
+        @media (max-width: 768px) {
+            display: none;
+        }
+    }
+
+
+
     .column{
         display: grid;
         grid-auto-flow: column;
         column-gap: 20px;
 
-        .lang{
+        @media (max-width: 992px) {
+            display: none;
+        }
 
+        &.burgers{
+            display: grid;
+          }
+
+        .lang{
             display: grid;
             align-items: center;
             justify-content: center;
@@ -82,11 +101,22 @@
                 box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.25);
             }
 
+            &.burger{
+                border-radius: 50%;
+                background: var(--color-white);
+                box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+                color: var(--color-black);
+            }
         }
-
     }
 
     .row {
+        display: block;
+        
+        @media (min-width: 992px) {
+            display: none;
+        }
+
         .lang{
             display: grid;
             grid-auto-flow: column;
@@ -133,3 +163,56 @@
       }
       
 }
+
+.burger__navigation{
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 65px;
+    justify-items: center;
+}
+
+
+
+.burger__content {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 100px;
+  }
+  
+  .burger {
+    display: none;
+    @media (max-width: 768px) {
+      display: flex;
+      align-items: center;
+    }
+  }
+  
+  .burger-body {
+    position: fixed;
+    min-width: 80%;
+    height: 100%;
+    background: #fff;
+    right: 0;
+    top: 0;
+    padding: 50px;
+    box-shadow: 0px 5px 15px rgba(30, 30, 30, 0.5);
+    transform: translateX(150%);
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 101;
+  }
+  .burger-body.active {
+    transform: translateX(0);
+    transition: all 0.5s;
+  }
+  .burger-wrapper {
+    width: 100%;
+  }
+  .burger-hide-btn {
+    position: absolute;
+    top: -35px;
+    right: -25px;
+    cursor: pointer;
+  }

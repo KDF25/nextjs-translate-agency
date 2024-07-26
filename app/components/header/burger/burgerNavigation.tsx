@@ -3,9 +3,9 @@
 import { useTranslation } from "@/app/i18n/client";
 import { scrollEnum } from "@/types/constansts";
 import { ILangPageProps } from "@/types/user";
-import styles from "../styles/Header.module.scss";
+import styles from "./../../styles/Header.module.scss";
 
-const TheNavigation: React.FC<ILangPageProps> = ({ lng }) => {
+const BurgerNavigation: React.FC<ILangPageProps> = ({ lng }) => {
   const { t } = useTranslation(lng);
 
   const scrollToSection = (sectionId: scrollEnum) => {
@@ -14,7 +14,7 @@ const TheNavigation: React.FC<ILangPageProps> = ({ lng }) => {
   };
 
   return (
-    <nav className={styles.navigation}>
+    <nav className={styles.burger__navigation}>
       <div
         className={styles.tab}
         onClick={() => scrollToSection(scrollEnum.services)}
@@ -42,4 +42,4 @@ const TheNavigation: React.FC<ILangPageProps> = ({ lng }) => {
     </nav>
   );
 };
-export default TheNavigation;
+export default BurgerNavigation;

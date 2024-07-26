@@ -9,34 +9,31 @@ body {
 .main__layout{
     display: grid;
     grid-auto-flow: row;
-    // flex-direction: column;
-    // min-height: calc(100vh - 80px);
-    // width: 100vw;
 }
 
 .container {
     max-width: var(--breakpoint-xl);
-    padding: 0 var(--container-padding-xl-side);
-    margin: 0 auto;
+    padding-left: var(--container-padding-xl-side);
+    padding-right: var(--container-padding-xl-side);
+    margin-left:  auto;
+    margin-right:  auto;
   
     @media (max-width: 992px) {
-      // max-width: var(--breakpoint-lg);
-      padding: 0 var(--container-padding-lg-side);
+      max-width: var(--breakpoint-lg);
+      padding-left: var(--container-padding-lg-side);
+      padding-right: var(--container-padding-lg-side);
     }
   
     @media (max-width: 768px) {
-      // max-width: var(--breakpoint-md);
-      padding: 0 var(--container-padding-md-side);
-    }
-  
-    @media (max-width: 576px) {
-      // max-width: var(--breakpoint-sm);
-      padding: 0 var(--container-padding-sm-side);
+      max-width: var(--breakpoint-md);
+      padding-left: var(--container-padding-md-side);
+      padding-right: var(--container-padding-md-side);
     }
   
     @media (max-width: 375px) {
-      // max-width: var(--breakpoint-xs);
-      padding: 0 var(--container-padding-xs-side);
+      max-width: var(--breakpoint-xs);
+      padding-left: var(--container-padding-xs-side);
+      padding-right: var(--container-padding-xs-side);
     }
   }
 
@@ -44,7 +41,7 @@ body {
 .swiper.youtube{
 
   .swiper-slide{
-    font-size: 0;
+    // font-size: 0;
     transition: opacity 0.5s ease, transform 0.5s ease !important;
   }
   
@@ -60,6 +57,11 @@ body {
     transform: translateY(20%)  scale(0.8)!important;
     pointer-events: none;
     z-index: 1;
+
+    @media (max-width: 992px) {
+      transform: translateY(10%)  scale(0.7)!important;
+    }
+  
   }
   .swiper-slide-next,
   .swiper-slide-duplicate-next{
@@ -67,6 +69,10 @@ body {
     transform: translateY(-20%) scale(0.8) !important;
     pointer-events: none;
     z-index: 1;
+
+    @media (max-width: 992px) {
+      transform: translateY(-10%)  scale(0.7)!important;
+    }
   }
   
   .swiper-slide-before-prev
@@ -78,22 +84,46 @@ body {
   }
   
   .swiper-wrapper {
-    padding: 150px 0 !important;
+    padding: 150px 0 250px 0 !important;
     margin-left: 100px !important;
+    
+    @media (max-width: 992px) {
+      margin-left: 30px !important;
+    }
+
+    @media (max-width: 768px) {
+      margin-left: -100px !important;
+    }
+
+    @media (max-width: 375px) {
+      margin-left: -50px !important;
+    }
   }
+
   .swiper-scrollbar.swiper-scrollbar-horizontal{
     opacity: 1 !important;
-    top: 87.2% !important;
+    top: 81.7% !important;
     left: 40% !important;
-    width: 29% !important;
+    width: 30% !important;
     height: 6px !important;
+
+    @media (max-width: 992px) {
+      top: 77.2% !important;
+      left: 27.5% !important;
+      width: 46% !important;
+    }
   }
   .swiper-button-next{
-    top: 86.6% !important;
-    left: 70% !important;
+    top: 81.2% !important;
+    left: 72.5% !important;
     margin: 0 !important;
     width: 20px !important;
     height: 17px !important;
+
+    @media (max-width: 992px) {
+      top: 76.6% !important;
+      left: 75% !important;
+    }
   
     &::after{
       content: "" !important;
@@ -113,9 +143,15 @@ body {
   }
   .swiper-pagination{
     position: absolute !important;
-    top: 85% !important;
+    top: 80% !important;
     left: -10% !important;
     z-index: 2 !important;
+
+
+    @media (max-width: 992px) {
+      top: 75% !important;
+      left: -22.5% !important;
+    }
   }
   
   .swiper-pagination-fraction {
@@ -131,25 +167,16 @@ body {
   }
 }
 
-
-
-
-
-.swiper-slide {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 18px;
-  font-size: 22px;
-  font-weight: bold;
-  color: #fff;
-  border-radius: 50px;
-  transform: none;
-  // transform: translate3d(calc(7.25% - 1800px), -30px, -100px) scale(1) !important;
-}
-
 .swiper.cards{
   padding-left: 45%;
+
+  @media (max-width: 992px) {
+    padding-left: 30%;
+  }
+  
+  @media (max-width: 768px) {
+    padding-left: 10%;
+  }
 
   .swiper-button-next{
     display: none;
@@ -158,9 +185,8 @@ body {
   .swiper-button-prev{
     width: 75px;
     height: 100px;
-    top: unset !important;
     left: unset !important;
-    bottom: 30px !important;
+    top: 210px !important;
     right: 125px !important;
 
     &::after{
@@ -191,7 +217,13 @@ body {
     }
 
   }
-  
+
+  .swiper-slide {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
   .swiper-slide.swiper-slide-visible.swiper-slide-active{
     .next_button{
       display: block;
@@ -201,7 +233,92 @@ body {
 .swiper-pagination.swiper-pagination-bullets.swiper-pagination-horizontal{
   bottom: -30px !important;
   padding-left: 30% !important;
+}
 
 }
 
+.swiper.parthers{
+  padding: 0 20px !important;
+
+  .swiper-wrapper {
+    padding: 50px 0 !important;
+  }
+}
+
+.admin__exit__wrapper{
+  margin: 10px 0px 20px 0px;
+  display: flex;
+  justify-content: space-between;
+
+  .exit {
+    padding: 20px 40px;
+    background: red;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 10px;
+  }
+}
+
+.admin__change{
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 20px;
+  padding: 20px;
+  background-color: #fff;
+
+  button{
+    width: 100%;
+  }
+
+  span{
+    text-align: center;
+    color: red;
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
+
+.burger__content {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 100px;
+}
+
+.burger {
+  display: none;
+  
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.burger-body {
+  position: fixed;
+  min-width: 80%;
+  height: 100%;
+  background: #fff;
+  right: 0;
+  top: 0;
+  padding: 50px;
+  box-shadow: 0px 5px 15px rgba(30, 30, 30, 0.5);
+  transform: translateX(150%);
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 101;
+}
+.burger-body.active {
+  transform: translateX(0);
+  transition: all 0.5s;
+}
+.burger-wrapper {
+  width: 100%;
+}
+.burger-hide-btn {
+  position: absolute;
+  top: -35px;
+  right: -25px;
+  cursor: pointer;
 }

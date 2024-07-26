@@ -1,25 +1,41 @@
-.wrapper{
-  display: grid;
-  grid-auto-flow: row;
-  row-gap: 80px;
+.wrapper{  
   margin-bottom: 150px;
 
   .top{
     display: grid;
     align-items: center;
     grid-template: 1fr/ 1fr 1fr;
-    column-gap: 20px;
+    gap: 20px;
     padding: 0 80px;
+    margin-bottom: 80px;
+
+    @media (max-width: 768px) {
+      grid-template: none;
+    }
 
     .title{
       text-align: left;
       color: var(--color-yellow);
-      font-size: 44px;
       font-style: normal;
       font-weight: 600;
       line-height: normal;
       position: relative;
       padding-right: 30px;
+
+      font-size: var(--font-size-title-main-xl);
+
+      @media (max-width: 992px) {
+        font-size: var(--font-size-title-main-lg);
+      }
+  
+      @media (max-width: 768px) {
+        font-size: var(--font-size-title-main-md);
+        padding-right: 0;
+      }
+  
+      @media (max-width: 375px) {
+        font-size: var(--font-size-title-main-xs);
+      }
 
       &::before{
         content: "";
@@ -31,12 +47,18 @@
         background: url('./../../../public/background-4.svg');
         background-size: cover;
         z-index: -1; 
+
+        @media (max-width: 768px) {
+          top: -200%;
+          left: -15%;
+        }
       }
     }
 
-    .image{
-      background: pink;
-      height: 470px;
+    .image__wrapper{
+      @media (max-width: 768px) {
+        display: none;
+      }
     }
   }
 
@@ -46,14 +68,37 @@
     column-gap: 20px;
     row-gap: 20px;
 
-    .partners{
-      display: grid;
-      align-items: center;
-      align-content: center;
-      justify-content: center;
-      height: 180px;
-      background: var(--color-white);
-      box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.25);
+    @media (max-width: 992px) {
+      grid-template: 1fr 1fr 1fr / 1fr 1fr;
+    }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .partner{
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 15px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    min-height: 180px;
+    background: var(--color-white);
+    box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.25);
+
+    img{
+      height: 80px;
+      width: auto;
+    }
+  }
+
+  .carousel{
+    display: none;
+    @media (max-width: 768px) {
+      display: block;
     }
   }
 }

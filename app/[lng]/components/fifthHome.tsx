@@ -4,11 +4,8 @@ import { useTranslation } from "@/app/i18n/client";
 import { ILangPageProps, IMailData } from "@/types/user";
 import React from "react";
 import { useForm } from "react-hook-form";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { FolderIcon } from "../icons/folder";
 import styles from "../styles/FifthHome.module.scss";
+import { FolderIcon } from "../icons";
 
 const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
   const {
@@ -22,7 +19,7 @@ const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
   const { t } = useTranslation(lng);
 
   return (
-    <section className={`${styles.wrapper} container`}>
+    <div className={`${styles.wrapper} container`}>
       <h2 className={styles.title}>{t("HomePage.FifthHome.title")}</h2>
       <div>
         <form action="" className={styles.form__wrapper}>
@@ -96,7 +93,7 @@ const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
           </button>
         </form>
       </div>
-    </section>
+    </div>
   );
 };
 

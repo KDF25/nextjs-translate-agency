@@ -1,15 +1,21 @@
 "use client";
 
-import ContentAdminAdd from "@/app/adminvenkon/components/contentAdminAdd";
+import ContentAdminEdit from "@/app/adminvenkon/components/contentAdminEdit";
 import { useTranslation } from "@/app/i18n/client";
+import { scrollEnum } from "@/types/constansts";
 import { IBlock, IHomePageProps } from "@/types/user";
-import { useState } from "react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { FirstIcon } from "../icons/Group 56";
+import {
+  OptionFirstIcon,
+  OptionFourthIcon,
+  OptionSecondIcon,
+  OptionThirdIcon,
+} from "../icons";
 import styles from "../styles/SecondHome.module.scss";
-import { scrollEnum } from "@/types/constansts";
 
 const SecondHome: React.FC<IHomePageProps> = ({
   section,
@@ -17,15 +23,26 @@ const SecondHome: React.FC<IHomePageProps> = ({
   pageId,
   lng,
 }) => {
-  const [activeBlock, setActiveBlock] = useState(section.blocks[0]);
+  const [activeBlock, setActiveBlock] = useState<IBlock | null>(null);
 
   const handleChangeActiveBlock = (block: IBlock) => {
     setActiveBlock(block);
   };
 
+  useEffect(() => {
+    setActiveBlock(section?.blocks[0]);
+  }, [section]);
+
   const { t } = useTranslation(lng);
+  const icons = [
+    <OptionFirstIcon key="first" />,
+    <OptionSecondIcon key="second" />,
+    <OptionThirdIcon key="third" />,
+    <OptionFourthIcon key="fourth" />,
+  ];
+
   return (
-    <section id={scrollEnum.services} className={`${styles.wrapper} container`}>
+    <div id={scrollEnum.services} className={`${styles.wrapper} container`}>
       <h2 className={styles.title}>{t("HomePage.SecondHome.title")}</h2>
       <div className={styles.information}>
         <div className={styles.tab__wrapper}>
@@ -37,48 +54,49 @@ const SecondHome: React.FC<IHomePageProps> = ({
               }`}
               onClick={() => handleChangeActiveBlock(block)}
             >
-              <div className={styles.tab__content}>
-                <FirstIcon/>
-                {/* <div className={styles.icon}></div> */}
+              <div className={styles.tab__top}>
+                <div className={`${styles.icon} ${styles[`icon_${index + 1}`]}`}>{icons[index]}</div>
                 <p>{block.texts[0].text}</p>
               </div>
+              <span>{block.texts[1].text}</span>
             </div>
           ))}
         </div>
         <div className={styles.content__wrapper}>
           <div className={styles.left}>
             <div className={styles.texts}>
-              <p>{activeBlock.texts[0].text}</p>
-              <span>{activeBlock.texts[1].text}</span>
+              <p>{activeBlock?.texts[0].text}</p>
+              <span>{activeBlock?.texts[1].text}</span>
             </div>
-            <div>
+            <div className={styles.order__wrapper}>
               <button className={styles.order}>
                 {t("HomePage.SecondHome.orderButton")}
               </button>
             </div>
           </div>
           <div className={styles.right}>
-            {/* <img
-              src={activeBlock.files[0].url}
-              alt={activeBlock.files[0].alts[0].text}
-            /> */}
+            {activeBlock && (
+              <Image
+                src={activeBlock.files[0].url}
+                alt={activeBlock.files[0].alts[0].text}
+                width={485}
+                height={425}
+              />
+            )}
           </div>
         </div>
-        {/* {isAdmin && pageId && (
-          <div>
-            <ContentAdminEdit block={block} pageId={pageId} lng={lng} />
-            <ContentAdminRemove blockId={block.id} pageId={pageId} />
-          </div>
-        )} */}
+        <div className={`${styles.order__wrapper} ${styles.mobile}`}>
+          <button className={styles.order}>
+            {t("HomePage.SecondHome.orderButton")}
+          </button>
+        </div>
       </div>
       {isAdmin && pageId && (
-        <ContentAdminAdd
-          block={section?.blocks[0]}
-          sectionId={section?.id}
-          pageId={pageId}
-        />
+        <div>
+          <ContentAdminEdit block={activeBlock!} pageId={pageId} lng={lng} />
+        </div>
       )}
-    </section>
+    </div>
   );
 };
 export default SecondHome;

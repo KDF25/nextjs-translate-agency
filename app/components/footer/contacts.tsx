@@ -44,10 +44,18 @@ const TheContacts: React.FC<ILangPageProps> = async ({ lng }) => {
         <p className={styles.email}>{EMAIL}</p>
       </div>
       <div className={styles.social_media}>
-        <a href={INSTAGRAM_REF} target="_blank" className={styles.icon}></a>
-        <a href={TELEGRAM_REF} target="_blank" className={styles.icon}></a>
-        <a href={FACEBOOK_REF} target="_blank" className={styles.icon}></a>
-        <a href={WHATSUP_REF} target="_blank" className={styles.icon}></a>
+        <a href={INSTAGRAM_REF} target="_blank" className={styles.icon}>
+          <InstagramIcon />
+        </a>
+        <a href={TELEGRAM_REF} target="_blank" className={styles.icon}>
+          <TelegramIcon />
+        </a>
+        <a href={FACEBOOK_REF} target="_blank" className={styles.icon}>
+          <FacebookIcon />
+        </a>
+        <a href={WHATSUP_REF} target="_blank" className={styles.icon}>
+          <WhatsUpIcon />
+        </a>
       </div>
     </nav>
   );

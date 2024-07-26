@@ -1,29 +1,30 @@
 "use client";
 
-import { languageEnum, languages } from "@/app/i18n/settings";
-import {
-  addAlt,
-  addBlock,
-  addFile,
-  addText,
-  getRevalidate,
-} from "@/services/admin";
+import { languages } from "@/app/i18n/settings";
+import { addAlt, addBlock, addFile, addText } from "@/services/admin";
+import { IBlock, IText } from "@/types/user";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import styles from "../styles/AuthAdmin.module.scss";
 
 interface Props {
-  block: any; // Replace with actual type
-  sectionId: number; // Replace with actual type
-  pageId: number; // Replace with actual type
+  block: IBlock;
+  sectionId: number;
+  pageId: number;
+}
+
+interface IAlt {
+  text: string;
+  language: string;
 }
 
 const ContentAdminAdd: React.FC<Props> = ({ block, sectionId, pageId }) => {
   const [isAdd, setIsAdd] = useState(false);
-  const [addedTextStates, setAddedTextStates] = useState<any[]>([]);
+  const [addedTextStates, setAddedTextStates] = useState<IText[]>([]);
   const [addedFile, setAddedFile] = useState<{ formData: FormData } | null>(
     null
   );
-  const [addedAltStates, setAddedAltStates] = useState<any[]>([]);
+  const [addedAltStates, setAddedAltStates] = useState<IAlt[]>([]);
   const router = useRouter();
 
   const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,21 +35,16 @@ const ContentAdminAdd: React.FC<Props> = ({ block, sectionId, pageId }) => {
 
   const handleChangeAlt = (
     lang: string,
-    index: number,
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const updatedText = event.target.value;
-    setAddedAltStates((prevStates) => {
-      const updatedStates = [...prevStates];
-      updatedStates[index] = {
-        ...updatedStates[index],
-        [lang]: {
-          ...updatedStates[index][lang],
-          text: updatedText,
-        },
-      };
-      return updatedStates;
+    const text = event.target.value;
+    const newAddData: IAlt[] = addedAltStates.map((item) => {
+      if (item.language === lang) {
+        return { ...item, text: text };
+      }
+      return item;
     });
+    setAddedAltStates(newAddData);
   };
 
   const handleChangeText = (
@@ -56,18 +52,14 @@ const ContentAdminAdd: React.FC<Props> = ({ block, sectionId, pageId }) => {
     index: number,
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const updatedText = event.target.value;
-    setAddedTextStates((prevStates) => {
-      const updatedStates = [...prevStates];
-      updatedStates[index] = {
-        ...updatedStates[index],
-        [lang]: {
-          ...updatedStates[index][lang],
-          text: updatedText,
-        },
-      };
-      return updatedStates;
+    const text = event.target.value;
+    const newAddData: IText[] = addedTextStates.map((item) => {
+      if (item.id === index && item.language === lang) {
+        return { ...item, text: text };
+      }
+      return item;
     });
+    setAddedTextStates(newAddData);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -75,145 +67,66 @@ const ContentAdminAdd: React.FC<Props> = ({ block, sectionId, pageId }) => {
     if (block?.files[0]?.id && addedFile) {
       addBlock(sectionId).then((data: any) => {
         addFile(data.block_id, addedFile.formData).then((data: any) =>
-          addAlt(
-            data.file_id,
-            addedAltStates[0]?.ru?.text,
-            addedAltStates[0]?.uz?.text,
-            addedAltStates[0]?.en?.text
-          )
+          addAlt(data.file_id, addedAltStates)
         );
         if (block?.texts[0]?.id) {
-          addedTextStates.map((texts) => {
-            addText(
-              data.block_id,
-              texts?.ru?.text,
-              texts?.uz?.text,
-              texts?.en?.text
-            );
-          });
+          addText(data.block_id, addedTextStates);
         }
       });
-      getRevalidate(pageId == 2 ? "/ru" : "/ru/whyvenkoncommunications");
-      getRevalidate(pageId == 2 ? "/en" : "/en/whyvenkoncommunications");
-      getRevalidate(pageId == 2 ? "/uz" : "/uz/whyvenkoncommunications");
-
       router.push("/adminvenkon");
     } else {
-      addBlock(sectionId).then((data: any) => {
-        addedTextStates.map((texts) => {
-          addText(
-            data.block_id,
-            texts?.ru?.text,
-            texts?.uz?.text,
-            texts?.en?.text
-          );
-        });
+      addBlock(sectionId).then((data: { block_id: number }) => {
+        addText(data.block_id, addedTextStates);
       });
-      // invalidateCache();
       router.push("/adminvenkon");
     }
   };
 
   useEffect(() => {
     if (block?.files[0]?.id) {
-      const altBlock = block?.files[0]?.alts.reduce((acc: any[], obj: any) => {
-        const alts = languages.reduce((langAcc, lang) => {
-          langAcc[lang] = { text: "" };
-          return langAcc;
-        }, {} as { [key in languageEnum]: { text: string } });
-        acc.push(alts);
-        return acc;
-      }, []);
-      setAddedAltStates(altBlock);
+      const firstTextData: IAlt[] = languages.map((language) => ({
+        language,
+        text: "",
+      }));
+      setAddedAltStates(firstTextData);
     }
 
     if (block?.texts[0]?.id) {
-      const textsBlock = block?.texts.reduce((acc: any[], obj: any) => {
-        const texts = languages.reduce((langAcc, lang) => {
-          langAcc[lang] = { text: "" };
-          return langAcc;
-        }, {} as { [key in languageEnum]: { text: string } });
-        acc.push(texts);
-        return acc;
-      }, []);
-      setAddedTextStates(textsBlock);
+      const ids = Array.from({ length: block.texts.length }, (_, i) => i);
+      const firstTextData: IText[] = ids.flatMap((id) =>
+        languages.map((language) => ({ id, language, text: "" }))
+      );
+      setAddedTextStates(firstTextData);
     }
-  }, [block?.files, block?.texts]);
+  }, [block]);
 
   return (
     <div>
       {isAdd ? (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <form
-            onSubmit={handleSubmit}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              padding: "3%",
-              border: "0.5px solid #999999",
-              borderRadius: "10px",
-              margin: "10px",
-            }}
-          >
+        <div className={styles.admin__wrapper__change}>
+          <form onSubmit={handleSubmit} className={styles.admin__wrapper}>
             {block?.files[0]?.id &&
               block?.files.map((file: any, index: number) => (
-                <div key={file.id}>
-                  <label
-                    style={{
-                      marginBottom: "10px",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <span style={{ fontWeight: "500", marginBottom: "10px" }}>
-                      Add file:
-                    </span>
+                <div className={styles.admin__wrapper} key={file.id}>
+                  <label>
+                    <span>Add file:</span>
                     <input
                       type="file"
-                      style={{
-                        padding: "10px",
-                        borderRadius: "15px",
-                        border: "0.5px solid #606060",
-                      }}
                       onChange={(event) => handleChangeFile(event)}
                     />
                   </label>
                   {languages.map((lang) => (
-                    <label
-                      key={lang}
-                      style={{
-                        marginBottom: "10px",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <span style={{ fontWeight: "500", marginBottom: "5px" }}>
-                        Add alt for image {lang}:
-                      </span>
+                    <label key={lang}>
+                      <span>Add alt for image {lang}:</span>
                       <input
                         type="text"
-                        style={{
-                          padding: "10px",
-                          borderRadius: "15px",
-                          border: "0.5px solid #606060",
-                        }}
-                        value={addedAltStates[index]?.[lang]?.text}
-                        onChange={(event) =>
-                          handleChangeAlt(lang, index, event)
+                        value={
+                          addedTextStates.find(
+                            (item) =>
+                              item.id === index && item.language === lang
+                          )?.text || ""
                         }
+                        onChange={(event) => handleChangeAlt(lang, event)}
                       />
                     </label>
                   ))}
@@ -221,29 +134,20 @@ const ContentAdminAdd: React.FC<Props> = ({ block, sectionId, pageId }) => {
               ))}
             {block?.texts[0]?.id &&
               block?.texts.map((text: any, index: number) => (
-                <div key={text.id}>
+                <div key={text.id} className={styles.admin__wrapper}>
                   {languages.map((lang) => (
-                    <label
-                      key={lang}
-                      style={{
-                        marginBottom: "10px",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <span style={{ fontWeight: "500", marginBottom: "5px" }}>
+                    <label key={lang}>
+                      <span>
                         Add text #{index + 1} {lang}:
                       </span>
                       <input
                         type="text"
-                        style={{
-                          padding: "10px",
-                          borderRadius: "15px",
-                          border: "0.5px solid #606060",
-                        }}
-                        value={addedTextStates[index][lang]?.text}
+                        value={
+                          addedTextStates.find(
+                            (item) =>
+                              item.id === index && item.language === lang
+                          )?.text || ""
+                        }
                         onChange={(event) =>
                           handleChangeText(lang, index, event)
                         }
@@ -255,28 +159,24 @@ const ContentAdminAdd: React.FC<Props> = ({ block, sectionId, pageId }) => {
             <input
               type="submit"
               value="Добавить блок"
+              className={styles.changeBtn}
               disabled={
                 (block?.files[0]?.id && addedFile === null) ||
                 (block?.files[0]?.id &&
-                  languages.some((lang) =>
-                    [0, 1].some(
-                      (idx) => addedAltStates?.[idx]?.[lang]?.text.length === 0
-                    )
-                  )) ||
+                  addedAltStates.some((item) => item.text === "")) ||
                 (block?.texts[0]?.id &&
-                  languages.some((lang) =>
-                    [0, 1].some(
-                      (idx) => addedTextStates?.[idx]?.[lang]?.text.length === 0
-                    )
-                  ))
+                  addedTextStates.some((item) => item.text === "")) ||
+                false
               }
             />
           </form>
-          <button onClick={() => setIsAdd(false)}>Назад</button>
+          <button className={styles.backBtn} onClick={() => setIsAdd(false)}>
+            Назад
+          </button>
         </div>
       ) : (
         <div>
-          <button style={{ color: "green" }} onClick={() => setIsAdd(true)}>
+          <button className={styles.changeBtn} onClick={() => setIsAdd(true)}>
             Добавить блок
           </button>
         </div>

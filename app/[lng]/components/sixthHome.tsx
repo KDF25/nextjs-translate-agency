@@ -1,13 +1,13 @@
 "use client";
 
-import { ILangPageProps } from "@/types/user";
-import styles from "../styles/SixthHome.module.scss";
 import { useTranslation } from "@/app/i18n/client";
-import { BsPinMapFill, BsTelephoneFill, BsEnvelopeFill } from "react-icons/bs";
 import { ADDRESS, CONTACT_FIRST, CONTACT_SECOND, EMAIL } from "@/config";
-import React, { useEffect } from "react";
-import { Loader } from "@googlemaps/js-api-loader";
 import { scrollEnum } from "@/types/constansts";
+import { ILangPageProps } from "@/types/user";
+import { Loader } from "@googlemaps/js-api-loader";
+import React, { useEffect } from "react";
+import { BsEnvelopeFill, BsPinMapFill, BsTelephoneFill } from "react-icons/bs";
+import styles from "../styles/SixthHome.module.scss";
 
 const SixthHome: React.FC<ILangPageProps> = ({ lng }) => {
   const { t } = useTranslation(lng);
@@ -41,7 +41,7 @@ const SixthHome: React.FC<ILangPageProps> = ({ lng }) => {
   }, []);
 
   return (
-    <section id={scrollEnum.contacts} className={`${styles.wrapper} container`}>
+    <div id={scrollEnum.contacts} className={`${styles.wrapper} container`}>
       <h2 className={styles.title}>{t("HomePage.SixthHome.title")}</h2>
       <div className={styles.content}>
         <div className={styles.left} ref={mapRef}></div>
@@ -74,7 +74,7 @@ const SixthHome: React.FC<ILangPageProps> = ({ lng }) => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 export default SixthHome;

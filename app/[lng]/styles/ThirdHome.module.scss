@@ -14,30 +14,50 @@
     background-size: cover;
     overflow: visible;
     z-index: 1;
+
+    @media (max-width: 768px) {
+      content: none;
+    }
   }
 
   .title{
     text-align: center;
     color: var(--color-yellow);
-    font-size: 44px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
     margin-bottom: 50px;
+    font-size: var(--font-size-title-main-xl);
+
+    @media (max-width: 992px) {
+      font-size: var(--font-size-title-main-lg);
+    }
+
+    @media (max-width: 768px) {
+      font-size: var(--font-size-title-main-md);
+    }
+
+    @media (max-width: 375px) {
+      font-size: var(--font-size-title-main-xs);
+    }
   }
 
   .content{
-    margin-bottom: 40px;
-    padding-bottom: 30px;
+    padding: 50px 0;
     position: relative;
 
     .image__wrapper{
       position: absolute;
-  
+      top: -30px;
+
+      @media (max-width: 768px) {
+        display: none;
+      }
     }
 
     .carousel{
       overflow: hidden;
+
       .card{
         width: 80%;
         height: 320px;  
@@ -49,8 +69,6 @@
         justify-items: flex-start;
         position: relative;
         overflow: hidden;
-    
-    
     
         &.card_1{
           background: #3289C7;
@@ -124,18 +142,42 @@
     
           p{
             padding: 10px;
-            font-size: 18px;
             font-style: normal;
             font-weight: 600;
             line-height: normal;
             border-radius: 12px;
+            font-size: var(--font-size-text-main-xl);
+
+            @media (max-width: 992px) {
+              font-size: var(--font-size-text-main-lg);
+            }
+        
+            @media (max-width: 768px) {
+              font-size: var(--font-size-text-main-md);
+            }
+        
+            @media (max-width: 375px) {
+              font-size: var(--font-size-text-main-xs);
+            }
           }
     
           span{
-            font-size: 16px;
             font-style: normal;
             font-weight: 400;
             line-height: normal;
+            font-size: var(--font-size-text-secondary-xl);
+
+            @media (max-width: 992px) {
+              font-size: var(--font-size-text-secondary-lg);
+            }
+        
+            @media (max-width: 768px) {
+              font-size: var(--font-size-text-secondary-md);
+            }
+        
+            @media (max-width: 375px) {
+              font-size: var(--font-size-text-secondary-xs);
+            }
           }
         }
       }
@@ -147,6 +189,10 @@
       display: grid;
       justify-content: center;
       align-items: center;
+
+      @media (max-width: 768px) {
+        display: none;
+      }
 
       button{
         border-radius: 40px;

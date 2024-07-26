@@ -4,7 +4,7 @@ import { Auth } from "@/services/admin";
 import Link from "next/link";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context";
-import styles from "../styles/AuthAdmin.module.css";
+import styles from "../styles/AuthAdmin.module.scss";
 
 export default function AuthAdmin() {
   const [login, setLogin] = useState<string>("");
@@ -30,52 +30,33 @@ export default function AuthAdmin() {
   };
 
   return (
-    <div>
+    <div className="container">
       {!isAuth ? (
         <div className={styles.form_wrapper}>
-          <h1 style={{ textAlign: "center", marginBottom: "30px" }}>
-            Admin panel
-          </h1>
+          <h1>Admin panel</h1>
           <form className={styles.form} onSubmit={handleSubmit}>
-            <label className={styles.form_label}>
+            <label>
               Login:
               <input
                 type="text"
-                className={styles.form_input}
                 value={login}
                 onChange={handleChangeLogin}
               />
             </label>
-            <label className={styles.form_label}>
+            <label>
               Password:
               <input
                 type="password"
-                className={styles.form_input}
                 value={password}
                 onChange={handleChangePassword}
               />
             </label>
-            <input
-              type="submit"
-              value="Войти"
-              className={styles.form_submit}
-            />
+            <input type="submit" value="Войти" className={styles.form_submit} />
           </form>
         </div>
       ) : (
-        <div
-          style={{
-            margin: "50px auto",
-            fontSize: "16px",
-            padding: "10%",
-            boxShadow: "0px 4px 20px #999999",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Link href="/adminvenkon/adminhome" className="my-link" style={{ margin: "10px" }}>
+        <div className={styles.wrapper}>
+          <Link href="/adminvenkon/adminhome" className={styles.my__link}>
             Home page
           </Link>
         </div>
