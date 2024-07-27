@@ -14,13 +14,13 @@ export async function generateMetadata({
 }: {
   params: ILangPageProps;
 }) {
-  // const pageId = 1;
-  // const response = await getData(pageId, lng);
-  // return {
-  //   title: response?.seo_title,
-  //   description: response?.seo_description,
-  //   keywords: response?.seo_keywords,
-  // };
+  const pageId = PAGE_ID;
+  const response = await getData(pageId, lng);
+  return {
+    title: response?.seo_title,
+    description: response?.seo_description,
+    keywords: response?.seo_keywords,
+  };
 }
 
 export default async function Home({

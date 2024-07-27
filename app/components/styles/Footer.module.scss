@@ -80,10 +80,12 @@
         justify-content: center;
         row-gap: 25px;
         column-gap: 35px;
+
         .column {
             flex: 1 1 auto;  
         }
     }
+    
 
     .column{
         display: grid;

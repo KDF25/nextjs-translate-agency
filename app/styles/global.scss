@@ -171,13 +171,9 @@ body {
   padding-left: 45%;
 
   @media (max-width: 992px) {
-    padding-left: 30%;
-  }
-  
-  @media (max-width: 768px) {
     padding-left: 10%;
   }
-
+  
   .swiper-button-next{
     display: none;
   }
