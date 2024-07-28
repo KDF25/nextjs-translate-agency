@@ -32,7 +32,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "app/components/footer/footer.tsx", "app/[lng]/page.tsx", "next-i18next.config.js", "app/adminvenkon/layout.tsx"  ],
+, "app/components/footer/footer.tsx", "app/[lng]/page.tsx", "next-i18next.config.js", "app/admin/layout.tsx"  ],
   "exclude": [
     "node_modules"
   ]

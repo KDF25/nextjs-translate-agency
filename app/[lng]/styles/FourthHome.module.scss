@@ -1,15 +1,25 @@
 .wrapper{
-  // display: grid;
-  // justify-content: center;
-  // align-items: center;
-  // align-content: center;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
   margin-top: 200px;
-  margin-bottom: 250px;
   position: relative;
   padding: 0;
 
+  margin-bottom: var(--margin-section-xl);
+
   @media (max-width: 992px) {
-      margin-bottom: 100px;
+    margin-bottom: var(--margin-section-lg);
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 0;
+    margin-bottom: var(--margin-section-md);
+  }
+
+  @media (max-width: 375px) {
+    margin-bottom: var(--margin-section-xs);
   }
 
   &::before{
@@ -34,16 +44,30 @@
       background-size: cover;
     }
   }
+
+.skeleton{
+  padding: 150px 0 250px 0;
+}
+
 .player__wrapper{
   position: relative;
+  display: grid;
+  justify-content: center;
+  align-items: center;
 
   .admin{
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 10%;
+    left: 10%;
   }
 
   .player{
+    &.empty{
+      display: grid;
+      justify-content: center;
+      align-items: center;
+    }
+
     width: 675px !important;
     height: 575px !important;
 
@@ -53,8 +77,14 @@
     }
 
     @media (max-width: 768px) {
-      width: 556px !important;
-      height: 446px !important;
+      width: 500px !important;
+      height: 420px !important;
+
+    }
+
+    @media (max-width: 576px) {
+      width: 350px !important;
+      height: 300px !important;
   }
     @media (max-width: 375px) {
       width: 280px !important;
@@ -64,3 +94,34 @@
 }
 }
 
+.loader {
+  width: calc(100px - 14px);
+  height: 50px;
+  border-radius: 50px;
+  background: 
+   radial-gradient(farthest-side,#0000 calc(100% - 15px),#ccc calc(100% - 14px) 99%,#0000) left,
+   radial-gradient(farthest-side,#0000 calc(100% - 15px),#ccc calc(100% - 14px) 99%,#0000) right;
+  background-size: calc(50% + 7px) 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  animation: l10-0 1s infinite linear;
+}
+.loader:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto; 
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-blue);
+  transform-origin: -14px 50%;
+  animation: l10-1 0.5s infinite linear;
+}
+@keyframes l10-0 { 
+    0%,49.99% { transform:scaleX(1)}
+    50%,100% { transform:scaleX(-1)} 
+}
+@keyframes l10-1 { 
+    100% { transform:rotate(1turn)} 
+}

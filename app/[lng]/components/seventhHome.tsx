@@ -1,6 +1,6 @@
 "use client";
 
-import ContentAdminEdit from "@/app/adminvenkon/components/contentAdminEdit";
+import ContentAdminEdit from "@/app/admin/components/contentAdminEdit";
 import { useTranslation } from "@/app/i18n/client";
 import { scrollEnum } from "@/types/constansts";
 import { IHomePageProps } from "@/types/user";
@@ -20,7 +20,6 @@ const SeventhHome: React.FC<IHomePageProps> = ({
 }) => {
   const { t } = useTranslation(lng);
   const firstBlock = section?.blocks[0];
-  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   return (
     <div id={scrollEnum.clients} className={`${styles.wrapper} container`}>
@@ -63,7 +62,7 @@ const SeventhHome: React.FC<IHomePageProps> = ({
           </div>
         ))}
       </div>
-      <div className={styles.carousel}>
+      <div className={`${styles.carousel} main__swiper__wrapper`}>
         <Swiper
           slidesPerView={1}
           loop={true}

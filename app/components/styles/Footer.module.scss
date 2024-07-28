@@ -85,14 +85,21 @@
             flex: 1 1 auto;  
         }
     }
-    
+
+    @media (max-width: 768px) {
+        column-gap: 250px;
+    }
+
+    @media (max-width: 475px) {
+        column-gap: 70px;
+    }
 
     .column{
         display: grid;
         grid-auto-flow: column;
         column-gap: 20px;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
 
         .address{
             font-size: 14px;

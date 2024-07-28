@@ -1,8 +1,8 @@
 "use client";
 
-import ContentAdminEdit from "@/app/adminvenkon/components/contentAdminEdit";
+import ContentAdminEdit from "@/app/admin/components/contentAdminEdit";
 import { useTranslation } from "@/app/i18n/client";
-import { scrollEnum } from "@/types/constansts";
+import { SCROLL_OFFSET, scrollEnum } from "@/types/constansts";
 import { IBlock, IHomePageProps } from "@/types/user";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -41,6 +41,20 @@ const SecondHome: React.FC<IHomePageProps> = ({
     <OptionFourthIcon key="fourth" />,
   ];
 
+  const scrollToSection = (sectionId: scrollEnum) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      const headerOffset = SCROLL_OFFSET;
+      const elementPosition = section.getBoundingClientRect().top;
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollBy({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div id={scrollEnum.services} className={`${styles.wrapper} container`}>
       <h2 className={styles.title}>{t("HomePage.SecondHome.title")}</h2>
@@ -55,7 +69,11 @@ const SecondHome: React.FC<IHomePageProps> = ({
               onClick={() => handleChangeActiveBlock(block)}
             >
               <div className={styles.tab__top}>
-                <div className={`${styles.icon} ${styles[`icon_${index + 1}`]}`}>{icons[index]}</div>
+                <div
+                  className={`${styles.icon} ${styles[`icon_${index + 1}`]}`}
+                >
+                  {icons[index]}
+                </div>
                 <p>{block.texts[0].text}</p>
               </div>
               <span>{block.texts[1].text}</span>
@@ -69,7 +87,10 @@ const SecondHome: React.FC<IHomePageProps> = ({
               <span>{activeBlock?.texts[1].text}</span>
             </div>
             <div className={styles.order__wrapper}>
-              <button className={styles.order}>
+              <button
+                className={styles.order}
+                onClick={() => scrollToSection(scrollEnum.form)}
+              >
                 {t("HomePage.SecondHome.orderButton")}
               </button>
             </div>
@@ -86,7 +107,10 @@ const SecondHome: React.FC<IHomePageProps> = ({
           </div>
         </div>
         <div className={`${styles.order__wrapper} ${styles.mobile}`}>
-          <button className={styles.order}>
+          <button
+            className={styles.order}
+            onClick={() => scrollToSection(scrollEnum.form)}
+          >
             {t("HomePage.SecondHome.orderButton")}
           </button>
         </div>

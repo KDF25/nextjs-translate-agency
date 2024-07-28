@@ -1,10 +1,10 @@
 "use client";
 
-import ContentAdminAdd from "@/app/adminvenkon/components/contentAdminAdd";
-import ContentAdminEdit from "@/app/adminvenkon/components/contentAdminEdit";
-import ContentAdminRemove from "@/app/adminvenkon/components/contentAdminRemove";
+import ContentAdminAdd from "@/app/admin/components/contentAdminAdd";
+import ContentAdminEdit from "@/app/admin/components/contentAdminEdit";
+import ContentAdminRemove from "@/app/admin/components/contentAdminRemove";
 import { useTranslation } from "@/app/i18n/client";
-import { scrollEnum } from "@/types/constansts";
+import { SCROLL_OFFSET, scrollEnum } from "@/types/constansts";
 import { IHomePageProps } from "@/types/user";
 import Image from "next/image";
 import { EffectCards, Navigation, Pagination } from "swiper";
@@ -23,10 +23,26 @@ const ThirdHome: React.FC<IHomePageProps> = ({
 }) => {
   const { t } = useTranslation(lng);
 
+  const scrollToSection = (sectionId: scrollEnum) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      const headerOffset = SCROLL_OFFSET;
+      const elementPosition = section.getBoundingClientRect().top;
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollBy({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div id={scrollEnum.aboutUs} className={`${styles.wrapper} container`}>
-      <h2 className={styles.title}>{t("HomePage.ThirdHome.title")}</h2>
-      <div className={styles.content}>
+      <div className={styles.title__wrapper}>
+        <h2 className={styles.title}>{t("HomePage.ThirdHome.title")}</h2>
+      </div>
+      <div className={`${styles.content} main__swiper__wrapper`}>
         <div className={styles.image__wrapper}>
           <Image
             className={styles.image}
@@ -37,7 +53,7 @@ const ThirdHome: React.FC<IHomePageProps> = ({
             priority
           />
         </div>
-        <div className={styles.carousel}>
+        <div className={`${styles.carousel} main__swiper__wrapper`}>
           <Swiper
             loop={true}
             cardsEffect={{
@@ -99,7 +115,9 @@ const ThirdHome: React.FC<IHomePageProps> = ({
         </div>
       )}
       <div className={styles.button}>
-        <button>{t("HomePage.ThirdHome.orderButton")}</button>
+        <button onClick={() => scrollToSection(scrollEnum.form)}>
+          {t("HomePage.ThirdHome.orderButton")}
+        </button>
       </div>
     </div>
   );

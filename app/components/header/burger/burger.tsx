@@ -47,7 +47,7 @@ const Burger: React.FC<ILangPageProps> = ({ lng }) => {
               </div>
             </div>
             <div className="burger__content">
-              <BurgerNavigation lng={lng} />
+              <BurgerNavigation lng={lng} onChange={handleBurger} />
               <BurgerLanguage lng={lng} />
             </div>
           </div>

@@ -1,24 +1,23 @@
-import { TheFooter } from "@/app/components/footer/footer";
-import { TheHeader } from "@/app/components/header/header";
 import { IHomePageProps } from "@/types/user";
 import { dir } from "i18next";
 import { Metadata } from "next";
-import { Montserrat } from "next/font/google";
 import Head from "next/head";
 import { ReactNode } from "react";
+import { TheFooter } from "../components/footer/footer";
+import { TheHeader } from "../components/header/header";
 import { languages } from "../i18n/settings";
-import "../styles/global.scss";
+import "./../styles/global.scss";
 
 export const metadata: Metadata = {
-  title: "Venkon Communications",
-  description: "Пиар агентство",
+  title: "Translate Agency",
+  description: "Агенство переводов",
   metadataBase: new URL(process.env.NEXT_PUBLIC_API_BASE_URL || ""),
   openGraph: {
     title: "Агенство переводов",
     description:
-      "Venkon Communications - пиар агентство полного цикла. Команда сильных специалистов и профессионалов своего дела помогут вам продвигать ваш бизнес с максимальной отдачей.",
-    url: "https://vencom.uz",
-    siteName: "Venkon Communication",
+      "Translate Agency - ваш надежный партнер в точных и оперативных переводческих услугах. От документов до сайтов, мы преодолеваем языковые барьеры с профессионализмом и точностью.",
+    url: "https://translate_agency.uz",
+    siteName: "Translate Agency",
     images: [
       {
         url: "/logo.svg",
@@ -50,10 +49,6 @@ interface RootLayoutProps {
   params: IHomePageProps;
 }
 
-const montserrat = Montserrat({
-  subsets: ["cyrillic", "cyrillic-ext", "latin", "latin-ext", "vietnamese"],
-});
-
 const RootLayout: React.FC<RootLayoutProps> = ({
   children,
   params: { lng },
@@ -63,13 +58,10 @@ const RootLayout: React.FC<RootLayoutProps> = ({
       <html lang={lng} dir={dir(lng)}>
         <Head>
           <link rel="icon" href="/favicon.ico" />
-          <style>{`@font-face { ${montserrat} }`}</style>
         </Head>
         <body>
           <main className="main__layout">
-            <TheHeader lng={lng} />
             <div>{children}</div>
-            <TheFooter lng={lng} />
           </main>
         </body>
       </html>

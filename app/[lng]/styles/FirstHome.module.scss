@@ -10,6 +10,18 @@
     padding-bottom: 330px;
   }
 
+  @media (max-width: 768px) {
+    padding-bottom: 350px;
+  }
+
+  @media (max-width: 600px) {
+    padding-bottom: 280px;
+  }
+
+  @media (max-width: 500px) {
+    padding-bottom: 230px;
+  }
+
   .content{
     display: grid;
     align-items: center;
@@ -46,6 +58,14 @@
       background: url('./../../../public/background-1-2.svg');
       background-size: cover; 
     }
+
+    @media (max-width: 768px) {
+      top: -390px;
+      height: 1380px;
+      background: url('./../../../public/background-1-2.svg');
+      background-size: cover; 
+    }
+
   }
   
   .left{

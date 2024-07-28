@@ -8,6 +8,8 @@ import SixthHome from "./components/sixthHome";
 import SeventhHome from "./components/seventhHome";
 import { ILangPageProps } from "@/types/user";
 import { PAGE_ID } from "@/config";
+import { TheHeader } from "../components/header/header";
+import { TheFooter } from "../components/footer/footer";
 
 export async function generateMetadata({
   params: { lng },
@@ -32,6 +34,7 @@ export default async function Home({
 
   return (
     <>
+      <TheHeader lng={lng} />
       <FirstHome section={response?.sections[0]} lng={lng} />
       <SecondHome section={response?.sections[1]} lng={lng} />
       <ThirdHome section={response?.sections[2]} lng={lng} />
@@ -39,6 +42,7 @@ export default async function Home({
       <FifthHome lng={lng} />
       <SixthHome lng={lng} />
       <SeventhHome section={response?.sections[4]} lng={lng} />
+      <TheFooter lng={lng} />
     </>
   );
 }

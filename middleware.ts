@@ -9,7 +9,7 @@ export const config = {
   matcher: ["/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)"],
 };
 
-export function middleware(req: NextRequest) {
+export async  function middleware(req: NextRequest) {
   let lng;
   if (req.cookies.has(cookieName))
     lng = acceptLanguage.get(req.cookies.get(cookieName)!.value);
@@ -20,7 +20,7 @@ export function middleware(req: NextRequest) {
   if (
     !languages.some((loc) => req.nextUrl.pathname.startsWith(`/${loc}`)) &&
     !req.nextUrl.pathname.startsWith("/_next") &&
-    !req.nextUrl.pathname.startsWith("/adminvenkon") &&
+    !req.nextUrl.pathname.startsWith("/admin") &&
     !req.nextUrl.pathname.startsWith("/logo-1.png") &&
     !req.nextUrl.pathname.startsWith("/api/revalidate")
   ) {
@@ -35,6 +35,11 @@ export function middleware(req: NextRequest) {
   response.headers.append('Access-Control-Allow-Origin', '*'); // Allow from any origin
   response.headers.append('Access-Control-Allow-Methods', 'GET, DELETE, PATCH, POST, PUT');
   response.headers.append('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+
+  // const res = await fetch(req.url);
+  // if (res.status === 404) {
+  //   return NextResponse.redirect(new URL(`/${lng}`, req.url));
+  // }
 
   if (req.headers.has("referer")) {
     const refererUrl = new URL(req.headers.get("referer")!);

@@ -99,7 +99,7 @@ const ContentAdminEdit: React.FC<ContentAdminEditProps> = ({
         putContentAlt(altStates);
       }
     }
-    router.push("/adminvenkon");
+    router.push("/admin");
   };
 
   useEffect(() => {

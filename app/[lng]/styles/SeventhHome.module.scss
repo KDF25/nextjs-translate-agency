@@ -1,16 +1,32 @@
 .wrapper{  
-  margin-bottom: 150px;
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 80px;
+  margin-top: 150px;
+  overflow-x: clip;
+  margin-bottom: var(--margin-section-xl);
 
+  @media (max-width: 992px) {
+    margin-bottom: var(--margin-section-lg);
+  }
+
+  @media (max-width: 768px) {
+    margin-bottom: var(--margin-section-md);
+  }
+
+  @media (max-width: 375px) {
+    margin-bottom: var(--margin-section-xs);
+  }
+  
   .top{
     display: grid;
     align-items: center;
-    grid-template: 1fr/ 1fr 1fr;
-    gap: 20px;
+    grid-template: 1fr/ 1fr 0.8fr;
     padding: 0 80px;
-    margin-bottom: 80px;
 
     @media (max-width: 768px) {
-      grid-template: none;
+      grid-template: none;   
+      padding: 0;
     }
 
     .title{
@@ -25,32 +41,45 @@
       font-size: var(--font-size-title-main-xl);
 
       @media (max-width: 992px) {
-        font-size: var(--font-size-title-main-lg);
+        font-size: var(--font-size-subtitle-main-lg);
       }
   
       @media (max-width: 768px) {
-        font-size: var(--font-size-title-main-md);
-        padding-right: 0;
+        font-size: var(--font-size-subtitle-main-md);
       }
   
       @media (max-width: 375px) {
-        font-size: var(--font-size-title-main-xs);
+        font-size: var(--font-size-subtitle-main-xs);
       }
 
       &::before{
         content: "";
         position: absolute;
-        top: -160%;
-        left: -25%;
-        width: 130%;
-        height: 400%;
+        top: -240px;
+        left: -20%;
+        width: 800px;
+        height: 600px;
         background: url('./../../../public/background-4.svg');
         background-size: cover;
         z-index: -1; 
 
+        @media (max-width: 992px) {
+          top: -170px;
+          left: -23%;
+          width: 600px;
+          height: 400px;
+        }
+
         @media (max-width: 768px) {
-          top: -200%;
-          left: -15%;
+          top: -200px;
+          left: -50px;
+        }
+
+        @media (max-width: 576px) {
+          top: -170px;
+          left: -50px;
+          width: 500px;
+          height: 300px;
         }
       }
     }

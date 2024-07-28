@@ -1,16 +1,25 @@
 "use client";
 
 import { useTranslation } from "@/app/i18n/client";
+import { SCROLL_OFFSET, scrollEnum } from "@/types/constansts";
 import { ILangPageProps } from "@/types/user";
 import styles from "../styles/Footer.module.scss";
-import { scrollEnum } from "@/types/constansts";
 
 const TheNavigation: React.FC<ILangPageProps> = ({ lng }) => {
   const { t } = useTranslation(lng);
 
   const scrollToSection = (sectionId: scrollEnum) => {
     const section = document.getElementById(sectionId);
-    section!.scrollIntoView({ behavior: "smooth" });
+    if (section) {
+      const headerOffset = SCROLL_OFFSET;
+      const elementPosition = section.getBoundingClientRect().top;
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollBy({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
   };
 
   return (

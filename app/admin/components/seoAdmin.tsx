@@ -45,7 +45,7 @@ export default function SeoAdmin({ seo, lng, seoId }: SeoAdminProps) {
     setTitle(null);
     setDescription(null);
     setKeywords(null);
-    router.push("/adminvenkon");
+    router.push("/admin");
   };
 
   return (

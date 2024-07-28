@@ -4,14 +4,14 @@ import Link from "next/link";
 import styles from "../styles/Header.module.scss";
 import TheLanguage from "./language";
 import TheNavigation from "./navigation";
-import logo from "./../icons/logo.png";
+import logo from "./../icons/logo.svg";
 import Burger from "./burger/burger";
 
 const TheHeader: React.FC<ILangPageProps> = async ({ lng }) => {
   return (
     <header>
-      <div className={`${styles.wrapper} container`}>
-        <div>
+      <div className={styles.wrapper}>
+        <div className={styles.logo_image}>
           <Link href={`/${lng}`}>
             <Image
               src={logo}

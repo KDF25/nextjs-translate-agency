@@ -1,14 +1,29 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
 @import "reset.scss";
 @import "variables.scss";
 
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: "Montserrat";
+}
+
 body {
-    font-family: "Montserrat";
+}
+
+header{
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .main__layout{
     display: grid;
     grid-auto-flow: row;
+
 }
 
 .container {
@@ -36,6 +51,19 @@ body {
       padding-right: var(--container-padding-xs-side);
     }
   }
+
+
+.main__swiper__wrapper{
+  overflow: hidden;
+  opacity: 1;
+}
+
+
+.swiper.youtube_loading{
+  .swiper-wrapper {
+    padding: 150px 0 250px 0 !important;
+  }
+}
 
 
 .swiper.youtube{
@@ -85,14 +113,10 @@ body {
   
   .swiper-wrapper {
     padding: 150px 0 250px 0 !important;
-    margin-left: 100px !important;
+    margin-left: 50px !important;
     
-    @media (max-width: 992px) {
-      margin-left: 30px !important;
-    }
-
-    @media (max-width: 768px) {
-      margin-left: -100px !important;
+    @media (max-width: 1200px) {
+      margin-left: 0 !important;
     }
 
     @media (max-width: 375px) {
@@ -141,6 +165,7 @@ body {
   .swiper-button-prev{
     display: none !important;
   }
+
   .swiper-pagination{
     position: absolute !important;
     top: 80% !important;
@@ -168,7 +193,6 @@ body {
 }
 
 .swiper.cards{
-  padding-left: 45%;
 
   @media (max-width: 992px) {
     padding-left: 10%;
@@ -179,11 +203,10 @@ body {
   }
 
   .swiper-button-prev{
-    width: 75px;
+    width: 100px;
     height: 100px;
-    left: unset !important;
+    left: 70% !important;
     top: 210px !important;
-    right: 125px !important;
 
     &::after{
       content: "" !important;
@@ -228,7 +251,6 @@ body {
 
 .swiper-pagination.swiper-pagination-bullets.swiper-pagination-horizontal{
   bottom: -30px !important;
-  padding-left: 30% !important;
 }
 
 }
@@ -261,6 +283,8 @@ body {
   row-gap: 20px;
   padding: 20px;
   background-color: #fff;
+  border-radius: 10px;
+  z-index: 100;
 
   button{
     width: 100%;

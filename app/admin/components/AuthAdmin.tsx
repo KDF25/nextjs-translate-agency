@@ -37,11 +37,7 @@ export default function AuthAdmin() {
           <form className={styles.form} onSubmit={handleSubmit}>
             <label>
               Login:
-              <input
-                type="text"
-                value={login}
-                onChange={handleChangeLogin}
-              />
+              <input type="text" value={login} onChange={handleChangeLogin} />
             </label>
             <label>
               Password:
@@ -56,7 +52,7 @@ export default function AuthAdmin() {
         </div>
       ) : (
         <div className={styles.wrapper}>
-          <Link href="/adminvenkon/adminhome" className={styles.my__link}>
+          <Link href="/admin/adminhome" className={styles.my__link}>
             Home page
           </Link>
         </div>

@@ -1,7 +1,6 @@
-import { useTranslation } from "@/app/i18n";
-import { ILangPageProps } from "@/types/user";
-import styles from "../styles/Footer.module.scss";
-import { BsPinMapFill, BsTelephoneFill, BsEnvelopeFill } from "react-icons/bs";
+"use client";
+
+import { useTranslation } from "@/app/i18n/client";
 import {
   CONTACT_FIRST,
   CONTACT_SECOND,
@@ -11,15 +10,18 @@ import {
   TELEGRAM_REF,
   WHATSUP_REF,
 } from "@/config";
+import { ILangPageProps } from "@/types/user";
+import { BsEnvelopeFill, BsPinMapFill, BsTelephoneFill } from "react-icons/bs";
 import {
+  FacebookIcon,
   InstagramIcon,
   TelegramIcon,
-  FacebookIcon,
   WhatsUpIcon,
 } from "../icons";
+import styles from "../styles/Footer.module.scss";
 
-const TheContacts: React.FC<ILangPageProps> = async ({ lng }) => {
-  const { t } = await useTranslation(lng);
+const TheContacts: React.FC<ILangPageProps> = ({ lng }) => {
+  const { t } = useTranslation(lng);
 
   return (
     <nav className={styles.contacts}>

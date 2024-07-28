@@ -73,12 +73,12 @@ const ContentAdminAdd: React.FC<Props> = ({ block, sectionId, pageId }) => {
           addText(data.block_id, addedTextStates);
         }
       });
-      router.push("/adminvenkon");
+      router.push("/admin");
     } else {
       addBlock(sectionId).then((data: { block_id: number }) => {
         addText(data.block_id, addedTextStates);
       });
-      router.push("/adminvenkon");
+      router.push("/admin");
     }
   };
 

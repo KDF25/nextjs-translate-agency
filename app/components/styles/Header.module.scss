@@ -1,5 +1,10 @@
 .wrapper{
 
+    .logo_image{
+      display: grid;
+      align-items: center;
+    }
+
     display: grid;
     grid-auto-flow: column;
     align-content: center;

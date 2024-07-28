@@ -19,7 +19,7 @@ export default function ContentAdminRemove({
 
   const handleDelete = () => {
     deleteBlock(blockId);
-    router.push("/adminvenkon");
+    router.push("/admin");
   };
 
   return (
