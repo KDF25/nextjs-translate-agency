@@ -9,7 +9,8 @@ import "./../styles/global.scss";
 export const metadata: Metadata = {
   title: "Vip-perevod",
   description: "Vip-perevod",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_API_BASE_URL || ""),
+  // metadataBase: new URL(process.env.NEXT_PUBLIC_API_BASE_URL || ""),
+  metadataBase: new URL("https://translate-agency.vercel.app" || ""),
   openGraph: {
     title: "Vip-perevod",
     description:
