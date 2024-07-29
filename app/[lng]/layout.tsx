@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: "Vip-perevod",
     description:
       "Vip-perevod - ваш надежный партнер в точных и оперативных переводческих услугах. От документов до сайтов, мы преодолеваем языковые барьеры с профессионализмом и точностью.",
-    url: "https://f928-90-156-160-58.ngrok-free.app",
+    url: "https://vip_perevod.com",
     siteName: "Vip-perevod",
     images: [
       {

@@ -98,6 +98,7 @@ const SecondHome: React.FC<IHomePageProps> = ({
           <div className={styles.right}>
             {activeBlock && (
               <Image
+                className={styles.image}
                 src={activeBlock.files[0].url}
                 alt={activeBlock.files[0].alts[0].text}
                 width={485}

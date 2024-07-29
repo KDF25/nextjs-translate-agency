@@ -235,6 +235,12 @@
               display: none;
             }
 
+            .right{
+              .image{
+                max-height: 425px;
+              }
+            }
+
             .left{
                 display: grid;
                 grid-auto-flow: row;
