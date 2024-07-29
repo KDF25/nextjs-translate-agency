@@ -24,12 +24,12 @@ export const metadata: Metadata = {
         height: 600,
         alt: "Vip-perevod",
       },
-      {
-        url: "/logoOG.png",
-        width: 1800,
-        height: 1600,
-        alt: "Vip-perevod",
-      },
+      // {
+      //   url: "/logoOG.png",
+      //   width: 1800,
+      //   height: 1600,
+      //   alt: "Vip-perevod",
+      // },
     ],
     locale: "uz-UZ",
     type: "website",
