@@ -2,10 +2,10 @@
 
 import ContentAdminEdit from "@/app/admin/components/contentAdminEdit";
 import { useTranslation } from "@/app/i18n/client";
+import { SCROLL_OFFSET, scrollEnum } from "@/types/constansts";
 import { IHomePageProps } from "@/types/user";
 import Image from "next/image";
 import styles from "../styles/FirstHome.module.scss";
-import { SCROLL_OFFSET, scrollEnum } from "@/types/constansts";
 
 const FirstHome: React.FC<IHomePageProps> = ({
   section,
@@ -63,14 +63,14 @@ const FirstHome: React.FC<IHomePageProps> = ({
           />
         </div>
       </div>
-      {/* {isAdmin && pageId && (
+      {isAdmin && pageId && (
         <ContentAdminEdit
           key={block.id}
           block={block}
           pageId={pageId}
           lng={lng}
         />
-      )} */}
+      )}
     </div>
   );
 };

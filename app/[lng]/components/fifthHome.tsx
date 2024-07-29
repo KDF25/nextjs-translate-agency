@@ -159,9 +159,11 @@ const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
                           </div>
                         </div>
                         <div className={styles.item__right}>
-                          <YesIcon />
+                          <div style={{padding: "5px"}}>
+                            <YesIcon />
+                          </div>
                           <div
-                            style={{ cursor: "pointer" }}
+                            style={{ cursor: "pointer", padding: "5px 10px" }}
                             onClick={(event) => handleRemoveFile(file, event)}
                           >
                             <BasketIcon />

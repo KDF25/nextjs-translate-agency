@@ -4,15 +4,12 @@
   row-gap: 30px;
   position: relative;
   margin-bottom: var(--margin-section-xl);
-
   @media (max-width: 992px) {
     margin-bottom: var(--margin-section-lg);
   }
-
   @media (max-width: 768px) {
     margin-bottom: var(--margin-section-md);
   }
-
   @media (max-width: 375px) {
     margin-bottom: var(--margin-section-xs);
   }
@@ -35,7 +32,6 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-
     font-size: var(--font-size-subtitle-main-xl);
 
     @media (max-width: 992px) {
@@ -49,7 +45,6 @@
     @media (max-width: 375px) {
       font-size: var(--font-size-subtitle-main-xs);
     }
-
   }
 
   .form__wrapper{
@@ -68,7 +63,7 @@
       justify-items: center;
       border-radius: 8px;
       border: 1px dashed #52A2EB;
-      padding: 45px 0 10px 0;
+      padding: 45px 10px 10px 10px;
 
       .files__wrapper__input{
         margin-top: 20px;

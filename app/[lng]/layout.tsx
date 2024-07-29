@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: "Vip-perevod",
     description:
       "Vip-perevod - ваш надежный партнер в точных и оперативных переводческих услугах. От документов до сайтов, мы преодолеваем языковые барьеры с профессионализмом и точностью.",
-    url: "https://vip_perevod.com",
+    url: "https://translate-agency.vercel.app",
     siteName: "Vip-perevod",
     images: [
       {
