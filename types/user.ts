@@ -46,7 +46,7 @@ export  interface IBlock {
     name: string;
     email: string;
     phoneNumber: string;
-    file: string[];
+    file: any[];
   }
 
 export interface ILangPageProps {

@@ -21,7 +21,7 @@ export async  function middleware(req: NextRequest) {
     !languages.some((loc) => req.nextUrl.pathname.startsWith(`/${loc}`)) &&
     !req.nextUrl.pathname.startsWith("/_next") &&
     !req.nextUrl.pathname.startsWith("/admin") &&
-    !req.nextUrl.pathname.startsWith("/logo-1.png") &&
+    !req.nextUrl.pathname.startsWith("/logoOG.png") &&
     !req.nextUrl.pathname.startsWith("/api/revalidate")
   ) {
     return NextResponse.redirect(

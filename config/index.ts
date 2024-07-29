@@ -12,3 +12,9 @@ export const ADDRESS = {
   };
 
 export const PAGE_ID = 8
+
+
+export const enum FILES {
+  maxSize = 50,
+  maxLenght = 5,
+}

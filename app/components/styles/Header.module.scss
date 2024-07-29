@@ -1,8 +1,13 @@
 .wrapper{
 
-    .logo_image{
+    .logo_image_wrapper{
       display: grid;
       align-items: center;
+
+      .logo_image{
+        width: 125px;
+        height: 30px;
+      }
     }
 
     display: grid;

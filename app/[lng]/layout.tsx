@@ -3,32 +3,31 @@ import { dir } from "i18next";
 import { Metadata } from "next";
 import Head from "next/head";
 import { ReactNode } from "react";
-import { TheFooter } from "../components/footer/footer";
-import { TheHeader } from "../components/header/header";
 import { languages } from "../i18n/settings";
 import "./../styles/global.scss";
 
 export const metadata: Metadata = {
-  title: "Translate Agency",
-  description: "Агенство переводов",
+  title: "Vip-perevod",
+  description: "Vip-perevod",
   metadataBase: new URL(process.env.NEXT_PUBLIC_API_BASE_URL || ""),
   openGraph: {
-    title: "Агенство переводов",
+    title: "Vip-perevod",
     description:
-      "Translate Agency - ваш надежный партнер в точных и оперативных переводческих услугах. От документов до сайтов, мы преодолеваем языковые барьеры с профессионализмом и точностью.",
-    url: "https://translate_agency.uz",
-    siteName: "Translate Agency",
+      "Vip-perevod - ваш надежный партнер в точных и оперативных переводческих услугах. От документов до сайтов, мы преодолеваем языковые барьеры с профессионализмом и точностью.",
+    url: "https://f928-90-156-160-58.ngrok-free.app",
+    siteName: "Vip-perevod",
     images: [
       {
-        url: "/logo.svg",
+        url: "/logoOG.png",
         width: 800,
         height: 600,
+        alt: "Vip-perevod",
       },
       {
-        url: "/logo.svg",
+        url: "/logoOG.png",
         width: 1800,
         height: 1600,
-        alt: "Translate Agency",
+        alt: "Vip-perevod",
       },
     ],
     locale: "uz-UZ",
@@ -55,7 +54,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({
 }) => {
   return (
     <>
-      <html lang={lng} dir={dir(lng)}>
+      <html lang={lng} dir={dir(lng)} prefix="og: http://ogp.me/ns#">
         <Head>
           <link rel="icon" href="/favicon.ico" />
         </Head>

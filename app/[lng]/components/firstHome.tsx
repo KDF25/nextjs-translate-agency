@@ -63,14 +63,14 @@ const FirstHome: React.FC<IHomePageProps> = ({
           />
         </div>
       </div>
-      {isAdmin && pageId && (
+      {/* {isAdmin && pageId && (
         <ContentAdminEdit
           key={block.id}
           block={block}
           pageId={pageId}
           lng={lng}
         />
-      )}
+      )} */}
     </div>
   );
 };
