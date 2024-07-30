@@ -26,7 +26,7 @@ const SecondHome: React.FC<IHomePageProps> = ({
   const [activeBlock, setActiveBlock] = useState<IBlock | null>(null);
 
   const handleChangeActiveBlock = (block: IBlock) => {
-    setActiveBlock(block);
+      setActiveBlock(block);
   };
 
   useEffect(() => {

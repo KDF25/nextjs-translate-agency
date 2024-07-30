@@ -15,6 +15,7 @@ import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "../styles/ThirdHome.module.scss";
 
+
 const ThirdHome: React.FC<IHomePageProps> = ({
   section,
   isAdmin,

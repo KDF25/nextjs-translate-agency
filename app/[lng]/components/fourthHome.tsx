@@ -4,9 +4,14 @@ import ContentAdminAdd from "@/app/admin/components/contentAdminAdd";
 import ContentAdminEdit from "@/app/admin/components/contentAdminEdit";
 import ContentAdminRemove from "@/app/admin/components/contentAdminRemove";
 import { IHomePageProps } from "@/types/user";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
-import { Navigation, Pagination, Scrollbar } from "swiper";
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  Swiper as SwiperType,
+} from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -21,10 +26,37 @@ const FourthHome: React.FC<IHomePageProps> = ({
   lng,
 }) => {
   const [isClient, setIsClient] = useState(false);
+  const playersRef = useRef<(ReactPlayer | null)[]>([]);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  const handleSlideChange = (swiper: SwiperType) => {
+    playersRef.current.forEach((player, index) => {
+      if (index !== swiper.activeIndex && player) {
+        const internalPlayer = player.getInternalPlayer();
+        if (internalPlayer && typeof internalPlayer.pauseVideo === "function") {
+          internalPlayer.pauseVideo();
+        }
+      }
+    });
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    e.stopPropagation();
+    if (swiperRef.current) {
+      swiperRef.current.allowTouchMove = true;
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    e.stopPropagation();
+    if (swiperRef.current) {
+      swiperRef.current.allowTouchMove = true;
+    }
+  };
 
   if (!isClient) {
     return (
@@ -51,6 +83,10 @@ const FourthHome: React.FC<IHomePageProps> = ({
           speed={500}
           centeredSlides={true}
           className={`youtube`}
+          onSlideChange={handleSlideChange}
+          scrollbar={{
+            hide: true,
+          }}
           breakpoints={{
             1344: {
               spaceBetween: -250,
@@ -64,22 +100,20 @@ const FourthHome: React.FC<IHomePageProps> = ({
             768: {
               spaceBetween: -150,
             },
-            // 576: {
-            //   spaceBetween: -150,
-            // },
-            // 375: {
-            //   spaceBetween: -100,
-            // },
-          }}
-          scrollbar={{
-            hide: true,
           }}
           pagination={{
             type: "fraction",
           }}
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+          }}
         >
           {section?.blocks?.map((block, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide
+              key={index}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+            >
               <div className={styles.player__wrapper}>
                 <ReactPlayer
                   className={styles.player}
@@ -87,6 +121,10 @@ const FourthHome: React.FC<IHomePageProps> = ({
                   url={block?.texts[0].text}
                   playing
                   controls
+                  ref={(ref) => {
+                    playersRef.current[index] = ref;
+                  }}
+                  style={{ pointerEvents: "auto" }}
                 />
                 {isAdmin && pageId && (
                   <div className={`admin__change ${styles.admin}`}>

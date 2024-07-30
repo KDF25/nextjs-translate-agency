@@ -108,6 +108,10 @@
 
                 &.active{
                     background: #C6EFFF;
+                    
+                    @media (max-width: 992px) {
+                      background: transparent;
+                    }
                 }
 
                 &__top{

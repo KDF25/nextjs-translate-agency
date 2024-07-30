@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import styles from "../styles/FifthHome.module.scss";
 import { BasketIcon, FileIcon, FolderIcon, YesIcon } from "../icons";
 import { scrollEnum } from "@/types/constansts";
-import { FILES } from "@/config";
+import { sendMail, sendMailFile } from "@/services/getData";
 
 const formatFileSize = (sizeInBytes: number): string => {
   if (sizeInBytes >= 1024 * 1024) {
@@ -20,26 +20,31 @@ const formatFileSize = (sizeInBytes: number): string => {
 };
 
 const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
-  const { register, watch, setValue } = useForm<IMailData>({
-    mode: "onChange",
-  });
+  const { register, watch, setValue, handleSubmit, reset } = useForm<IMailData>(
+    {
+      mode: "onChange",
+    }
+  );
   const { t } = useTranslation(lng);
 
   const formState = watch();
-  const files = formState?.file || [];
+  const files = formState?.file;
   const [dragActive, setDragActive] = useState(false);
+  const [fileInfo, setFileInfo] = useState<{ name: string; size: string } | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
-      const newFiles: File[] = [...e.target.files];
-      const newAllFiles = [...files, ...newFiles];
-      setValue("file", newAllFiles.slice(0, FILES.maxLenght));
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append("file", e.target.files![0]);
+      setValue("file", formData);
+      setFileInfo({ name: file.name, size: formatFileSize(file.size) });
     }
   };
 
   const handleReset = () => {
-    setValue("file", []);
+    setValue("file", null);
   };
 
   const handleDrag = function (e: React.DragEvent<HTMLDivElement>) {
@@ -56,27 +61,32 @@ const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
     e.preventDefault();
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      const newFiles: File[] = [...e.dataTransfer.files];
-      if (files.length + newFiles.length <= 10) {
-        setValue("file", [...files, ...newFiles]);
-      }
+      const file = e.dataTransfer.files[0];
+      const formData = new FormData();
+      formData.append("file", e.dataTransfer.files![0]);
+      setValue("file", formData);
+      setFileInfo({ name: file.name, size: formatFileSize(file.size) });
     }
   };
 
-  const handleRemoveFile = (
-    file: File,
-    event: React.MouseEvent<HTMLDivElement>
-  ) => {
-    console.log("file", file);
+  const handleRemoveFile = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     event.preventDefault();
-    const newFiles = files?.filter((item) => item !== file);
-    setValue("file", newFiles);
+    handleReset();
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = (data: IMailData) => {
+    console.log
+    if (data?.file) {
+      sendMailFile(data.name, data.phoneNumber, data.email, data.file);
+    } else {
+      sendMail(data.name, data.phoneNumber, data.email);
+    }
+    alert(t("FifthHome.alert"));
+    reset();
   };
+
+  console.log(files)
 
   return (
     <div id={scrollEnum.form} className={`${styles.wrapper} container`}>
@@ -85,7 +95,7 @@ const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
         <form
           action=""
           className={styles.form__wrapper}
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <label className={styles.form__title}>
             <span className={styles.text}>{t("HomePage.FifthHome.name")}</span>
@@ -147,33 +157,30 @@ const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
               onDrop={handleDrop}
             >
               <div className={styles.files__wrapper}>
-                {files.length !== 0 && (
+                {files ? (
                   <div className={styles.items}>
-                    {files.map((file, id) => (
-                      <div key={id} className={styles.item}>
-                        <div className={styles.item__left}>
-                          <FileIcon />
-                          <div className={styles.item__text}>
-                            <p>{file?.name}</p>
-                            <span>{formatFileSize(file?.size)}</span>
-                          </div>
-                        </div>
-                        <div className={styles.item__right}>
-                          <div style={{padding: "5px"}}>
-                            <YesIcon />
-                          </div>
-                          <div
-                            style={{ cursor: "pointer", padding: "5px 10px" }}
-                            onClick={(event) => handleRemoveFile(file, event)}
-                          >
-                            <BasketIcon />
-                          </div>
+                    <div className={styles.item}>
+                      <div className={styles.item__left}>
+                        <FileIcon />
+                        <div className={styles.item__text}>
+                          <p>{fileInfo?.name}</p>
+                          <span>{formatFileSize(parseFloat(fileInfo?.size!))}</span>
                         </div>
                       </div>
-                    ))}
+                      <div className={styles.item__right}>
+                        <div style={{ padding: "5px" }}>
+                          <YesIcon />
+                        </div>
+                        <div
+                          style={{ cursor: "pointer", padding: "5px 10px" }}
+                          onClick={(event) => handleRemoveFile(event)}
+                        >
+                          <BasketIcon />
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                )}
-                {files.length < FILES.maxLenght && (
+                ) : (
                   <>
                     <FolderIcon />
                     <div className={styles.files__wrapper__input}>

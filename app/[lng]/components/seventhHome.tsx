@@ -5,7 +5,6 @@ import { useTranslation } from "@/app/i18n/client";
 import { scrollEnum } from "@/types/constansts";
 import { IHomePageProps } from "@/types/user";
 import Image from "next/image";
-import { useMediaQuery } from "react-responsive";
 import { Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";

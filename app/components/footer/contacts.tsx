@@ -5,19 +5,12 @@ import {
   CONTACT_FIRST,
   CONTACT_SECOND,
   EMAIL,
-  FACEBOOK_REF,
   INSTAGRAM_REF,
   TELEGRAM_REF,
-  WHATSUP_REF,
 } from "@/config";
 import { ILangPageProps } from "@/types/user";
 import { BsEnvelopeFill, BsPinMapFill, BsTelephoneFill } from "react-icons/bs";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  TelegramIcon,
-  WhatsUpIcon,
-} from "../icons";
+import { InstagramIcon, TelegramIcon } from "../icons";
 import styles from "../styles/Footer.module.scss";
 
 const TheContacts: React.FC<ILangPageProps> = ({ lng }) => {
@@ -34,16 +27,18 @@ const TheContacts: React.FC<ILangPageProps> = ({ lng }) => {
           }}
         />
       </div>
-      <div className={styles.column}>
-        <BsTelephoneFill />
-        <div className={styles.number}>
-          <p>{CONTACT_FIRST}</p>
-          <p>{CONTACT_SECOND}</p>
+      <div className={styles.info}>
+        <div className={styles.column}>
+          <BsEnvelopeFill />
+          <p className={styles.email}>{EMAIL}</p>
         </div>
-      </div>
-      <div className={styles.column}>
-        <BsEnvelopeFill />
-        <p className={styles.email}>{EMAIL}</p>
+        <div className={styles.column}>
+          <BsTelephoneFill />
+          <div className={styles.number}>
+            <p>{CONTACT_FIRST}</p>
+            <p>{CONTACT_SECOND}</p>
+          </div>
+        </div>
       </div>
       <div className={styles.social_media}>
         <a href={INSTAGRAM_REF} target="_blank" className={styles.icon}>
@@ -51,12 +46,6 @@ const TheContacts: React.FC<ILangPageProps> = ({ lng }) => {
         </a>
         <a href={TELEGRAM_REF} target="_blank" className={styles.icon}>
           <TelegramIcon />
-        </a>
-        <a href={FACEBOOK_REF} target="_blank" className={styles.icon}>
-          <FacebookIcon />
-        </a>
-        <a href={WHATSUP_REF} target="_blank" className={styles.icon}>
-          <WhatsUpIcon />
         </a>
       </div>
     </nav>

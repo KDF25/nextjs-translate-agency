@@ -94,14 +94,14 @@ export default function SeoAdmin({ seo, lng, seoId }: SeoAdminProps) {
         <div className={styles.seo__wrapper}>
           <div className={styles.texts}>
             <div className={styles.text}>
-              <p>Title: </p> <span>{seo?.seo_title}</span>
+              <p>Title: {lng}</p> <span>{seo?.seo_title}</span>
             </div>
             <div className={styles.text}>
-              <p>Description: </p>
+              <p>Description: {lng}</p>
               <span>{seo?.seo_description}</span>
             </div>
             <div className={styles.text}>
-              <p>Keywords: </p>
+              <p>Keywords: {lng}</p>
               <span>{seo?.seo_keywords}</span>
             </div>
           </div>
