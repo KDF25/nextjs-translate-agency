@@ -14,7 +14,7 @@
         padding: 20px var(--container-padding-md-side) 15px var(--container-padding-md-side);
     }
     
-    @media (max-width: 375px) {
+    @media (max-width: 376px) {
         padding: 10px var(--container-padding-xs-side) 15px var(--container-padding-xs-side);
     }
 
@@ -55,6 +55,10 @@
     align-items: center;
     column-gap: 40px;
     color: var(--color-white);
+
+    @media (max-width: 576px) {
+        column-gap: 25px;
+    }
 
     .tab{
         cursor: pointer;

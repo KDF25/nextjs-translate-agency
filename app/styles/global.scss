@@ -11,6 +11,7 @@
 }
 
 body {
+  background: rgb(47, 255, 0);
 }
 
 header{
@@ -44,7 +45,7 @@ header{
       padding-right: var(--container-padding-md-side);
     }
   
-    @media (max-width: 375px) {
+    @media (max-width: 376px) {
       max-width: var(--breakpoint-xs);
       padding-left: var(--container-padding-xs-side);
       padding-right: var(--container-padding-xs-side);
@@ -118,7 +119,7 @@ header{
       margin-left: 0 !important;
     }
 
-    @media (max-width: 375px) {
+    @media (max-width: 376px) {
       margin-left: -50px !important;
     }
   }
@@ -355,3 +356,5 @@ header{
   right: -25px;
   cursor: pointer;
 }
+
+

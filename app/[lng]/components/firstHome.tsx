@@ -57,8 +57,8 @@ const FirstHome: React.FC<IHomePageProps> = ({
             className={styles.image}
             src={block?.files[0]?.url}
             alt={block?.files[0]?.alts[0]?.text}
-            width={475}
-            height={445}
+            width={2000}
+            height={2000}
             priority
           />
         </div>

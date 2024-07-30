@@ -24,14 +24,22 @@ const SecondHome: React.FC<IHomePageProps> = ({
   lng,
 }) => {
   const [activeBlock, setActiveBlock] = useState<IBlock | null>(null);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
 
   const handleChangeActiveBlock = (block: IBlock) => {
+    if (block !== activeBlock) {
+      setIsVisible(false);
       setActiveBlock(block);
+    }
   };
 
   useEffect(() => {
     setActiveBlock(section?.blocks[0]);
   }, [section]);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, [activeBlock]);
 
   const { t } = useTranslation(lng);
   const icons = [
@@ -54,7 +62,7 @@ const SecondHome: React.FC<IHomePageProps> = ({
       });
     }
   };
-
+  console.log(isVisible);
   return (
     <div id={scrollEnum.services} className={`${styles.wrapper} container`}>
       <h2 className={styles.title}>{t("HomePage.SecondHome.title")}</h2>
@@ -80,7 +88,11 @@ const SecondHome: React.FC<IHomePageProps> = ({
             </div>
           ))}
         </div>
-        <div className={styles.content__wrapper}>
+        <div
+          className={`${styles.content__wrapper} ${
+            isVisible ? styles.no_hidden : styles.hidden
+          }`}
+        >
           <div className={styles.left}>
             <div className={styles.texts}>
               <p>{activeBlock?.texts[0].text}</p>
@@ -103,6 +115,7 @@ const SecondHome: React.FC<IHomePageProps> = ({
                 alt={activeBlock.files[0].alts[0].text}
                 width={485}
                 height={425}
+                priority
               />
             )}
           </div>

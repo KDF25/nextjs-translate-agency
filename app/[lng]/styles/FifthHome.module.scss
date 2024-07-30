@@ -10,7 +10,7 @@
   @media (max-width: 768px) {
     margin-bottom: var(--margin-section-md);
   }
-  @media (max-width: 375px) {
+  @media (max-width: 376px) {
     margin-bottom: var(--margin-section-xs);
   }
 
@@ -42,7 +42,7 @@
       font-size: var(--font-size-subtitle-main-md);
     }
 
-    @media (max-width: 375px) {
+    @media (max-width: 376px) {
       font-size: var(--font-size-subtitle-main-xs);
     }
   }
@@ -148,6 +148,10 @@
         font-weight: 400;
         line-height: normal;
 
+        @media (max-width: 576px) {
+          padding: 10px;
+        }
+
       }
 
     }
@@ -162,6 +166,15 @@
       line-height: normal;
       border-radius: 12px;
       background: var(--color-yellow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      &:hover {
+        transform: scale(1.01);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      &:active {
+        transform: scale(0.9);
+      }
     }
 
   }
