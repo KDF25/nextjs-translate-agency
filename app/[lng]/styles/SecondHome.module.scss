@@ -94,17 +94,16 @@
             }
 
             .tab{
-                display: grid;
-                justify-content: center;
-                align-items: start;
                 padding: 30px 40px 60px 40px;
                 border-radius: 50px;
                 box-shadow: 0px 4px 16px rgba(0, 150, 234, 0.31);
                 background: var(--color-white);
-
                 display: grid;
                 grid-auto-flow: row;
+                justify-content: center;
+                align-items: start;
                 row-gap: 35px;
+                cursor: pointer;
 
                 &.active{
                     background: #C6EFFF;
