@@ -44,20 +44,6 @@ const FourthHome: React.FC<IHomePageProps> = ({
     });
   };
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    e.stopPropagation();
-    if (swiperRef.current) {
-      swiperRef.current.allowTouchMove = true;
-    }
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    e.stopPropagation();
-    if (swiperRef.current) {
-      swiperRef.current.allowTouchMove = true;
-    }
-  };
-
   if (!isClient) {
     return (
       <div className={`${styles.wrapper} container`}>
@@ -109,11 +95,7 @@ const FourthHome: React.FC<IHomePageProps> = ({
           }}
         >
           {section?.blocks?.map((block, index) => (
-            <SwiperSlide
-              key={index}
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-            >
+            <SwiperSlide key={index}>
               <div className={styles.player__wrapper}>
                 <ReactPlayer
                   className={styles.player}
