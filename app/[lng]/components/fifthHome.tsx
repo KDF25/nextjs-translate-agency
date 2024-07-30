@@ -1,13 +1,13 @@
 "use client";
 
 import { useTranslation } from "@/app/i18n/client";
+import { sendMail, sendMailFile } from "@/services/user";
+import { scrollEnum } from "@/types/constansts";
 import { ILangPageProps, IMailData } from "@/types/user";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import styles from "../styles/FifthHome.module.scss";
 import { BasketIcon, FileIcon, FolderIcon, YesIcon } from "../icons";
-import { scrollEnum } from "@/types/constansts";
-import { sendMail, sendMailFile } from "@/services/getData";
+import styles from "../styles/FifthHome.module.scss";
 
 const formatFileSize = (sizeInBytes: number): string => {
   if (sizeInBytes >= 1024 * 1024) {
@@ -30,7 +30,10 @@ const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
   const formState = watch();
   const files = formState?.file;
   const [dragActive, setDragActive] = useState(false);
-  const [fileInfo, setFileInfo] = useState<{ name: string; size: string } | null>(null);
+  const [fileInfo, setFileInfo] = useState<{
+    name: string;
+    size: string;
+  } | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -76,7 +79,7 @@ const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
   };
 
   const onSubmit = (data: IMailData) => {
-    console.log
+    console.log;
     if (data?.file) {
       sendMailFile(data.name, data.phoneNumber, data.email, data.file);
     } else {
@@ -86,7 +89,7 @@ const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
     reset();
   };
 
-  console.log(files)
+  console.log(files);
 
   return (
     <div id={scrollEnum.form} className={`${styles.wrapper} container`}>
@@ -164,7 +167,9 @@ const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
                         <FileIcon />
                         <div className={styles.item__text}>
                           <p>{fileInfo?.name}</p>
-                          <span>{formatFileSize(parseFloat(fileInfo?.size!))}</span>
+                          <span>
+                            {formatFileSize(parseFloat(fileInfo?.size!))}
+                          </span>
                         </div>
                       </div>
                       <div className={styles.item__right}>
