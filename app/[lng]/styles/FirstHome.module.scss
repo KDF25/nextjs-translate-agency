@@ -180,22 +180,14 @@
     }
 
     .image{
-      width: 475px;
-      height: 445px;
-
       @media (max-width: 992px) {
-        width: 400px;
-        height: 375px;
+        width: 40vw;
+        height: 40vw;
       }
 
       @media (max-width: 768px) {
-        width: 315px;
-        height: 295px;
-      }
-
-      @media (max-width: 376px) {
-        width: 260px;
-        height: 245px;
+        min-width: 315px;
+        min-height: 295px;
       }
     }
   }
