@@ -2,9 +2,11 @@
 
 import { useTranslation } from "@/app/i18n/client";
 import { ADDRESS, CONTACT_FIRST, CONTACT_SECOND, EMAIL } from "@/config";
+import { MAIN_PAGE_ANIMATION } from "@/types/animation";
 import { scrollEnum } from "@/types/constansts";
 import { ILangPageProps } from "@/types/user";
 import { Loader } from "@googlemaps/js-api-loader";
+import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 import { BsEnvelopeFill, BsPinMapFill, BsTelephoneFill } from "react-icons/bs";
 import styles from "../styles/SixthHome.module.scss";
@@ -39,14 +41,31 @@ const SixthHome: React.FC<ILangPageProps> = ({ lng }) => {
     };
     initMap();
   }, []);
-
+  let custom = 0;
   return (
-    <div id={scrollEnum.contacts} className={`${styles.wrapper} container`}>
-      <h2 className={styles.title}>{t("HomePage.SixthHome.title")}</h2>
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={MAIN_PAGE_ANIMATION.viewport}
+      variants={MAIN_PAGE_ANIMATION.animationVision}
+      id={scrollEnum.contacts}
+      className={`${styles.wrapper} container`}
+    >
+      <motion.h2
+        custom={custom++}
+        variants={MAIN_PAGE_ANIMATION.animationVision}
+        className={styles.title}
+      >
+        {t("HomePage.SixthHome.title")}
+      </motion.h2>
       <div className={styles.content}>
         <div className={styles.left} ref={mapRef}></div>
         <div className={styles.right}>
-          <div className={styles.contact}>
+          <motion.div
+            custom={custom++}
+            variants={MAIN_PAGE_ANIMATION.animationRight}
+            className={styles.contact}
+          >
             <div className={styles.icon}>
               <BsTelephoneFill />
             </div>
@@ -54,14 +73,22 @@ const SixthHome: React.FC<ILangPageProps> = ({ lng }) => {
               <p>{CONTACT_FIRST}</p>
               <p>{CONTACT_SECOND}</p>
             </div>
-          </div>
-          <div className={styles.contact}>
+          </motion.div>
+          <motion.div
+            custom={custom++}
+            variants={MAIN_PAGE_ANIMATION.animationRight}
+            className={styles.contact}
+          >
             <div className={styles.icon}>
               <BsEnvelopeFill />
             </div>
             <p>{EMAIL}</p>
-          </div>
-          <div className={styles.contact}>
+          </motion.div>
+          <motion.div
+            custom={custom++}
+            variants={MAIN_PAGE_ANIMATION.animationRight}
+            className={styles.contact}
+          >
             <div className={styles.icon}>
               <BsPinMapFill />
             </div>
@@ -71,10 +98,10 @@ const SixthHome: React.FC<ILangPageProps> = ({ lng }) => {
                 __html: t("HomePage.SixthHome.address"),
               }}
             />
-          </div>
+          </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 export default SixthHome;

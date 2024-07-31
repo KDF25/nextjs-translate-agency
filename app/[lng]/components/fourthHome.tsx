@@ -3,7 +3,9 @@
 import ContentAdminAdd from "@/app/admin/components/contentAdminAdd";
 import ContentAdminEdit from "@/app/admin/components/contentAdminEdit";
 import ContentAdminRemove from "@/app/admin/components/contentAdminRemove";
+import { MAIN_PAGE_ANIMATION } from "@/types/animation";
 import { IHomePageProps } from "@/types/user";
+import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import {
@@ -57,10 +59,20 @@ const FourthHome: React.FC<IHomePageProps> = ({
       </div>
     );
   }
-
+  let custom = 0;
   return (
-    <div className={`${styles.wrapper} container`}>
-      <div className="main__swiper__wrapper">
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={MAIN_PAGE_ANIMATION.viewport}
+      variants={MAIN_PAGE_ANIMATION.animationVision}
+      className={`${styles.wrapper} container`}
+    >
+      <motion.div
+        custom={custom++}
+        variants={MAIN_PAGE_ANIMATION.animationVision}
+        className="main__swiper__wrapper"
+      >
         <Swiper
           slidesPerView={2}
           loop={true}
@@ -96,7 +108,11 @@ const FourthHome: React.FC<IHomePageProps> = ({
         >
           {section?.blocks?.map((block, index) => (
             <SwiperSlide key={index}>
-              <div className={styles.player__wrapper}>
+              <motion.div
+                custom={custom++}
+                variants={MAIN_PAGE_ANIMATION.animationVision}
+                className={styles.player__wrapper}
+              >
                 <ReactPlayer
                   className={styles.player}
                   light
@@ -119,12 +135,12 @@ const FourthHome: React.FC<IHomePageProps> = ({
                     />
                   </div>
                 )}
-              </div>
+              </motion.div>
             </SwiperSlide>
           ))}
         </Swiper>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

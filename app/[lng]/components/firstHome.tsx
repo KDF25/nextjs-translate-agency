@@ -2,8 +2,10 @@
 
 import ContentAdminEdit from "@/app/admin/components/contentAdminEdit";
 import { useTranslation } from "@/app/i18n/client";
+import { MAIN_PAGE_ANIMATION } from "@/types/animation";
 import { SCROLL_OFFSET, scrollEnum } from "@/types/constansts";
 import { IHomePageProps } from "@/types/user";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import styles from "../styles/FirstHome.module.scss";
 
@@ -14,7 +16,7 @@ const FirstHome: React.FC<IHomePageProps> = ({
   lng,
 }) => {
   const { t } = useTranslation(lng);
-  const block = section?.blocks[0]
+  const block = section?.blocks[0];
   const scrollToSection = (sectionId: scrollEnum) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -28,11 +30,22 @@ const FirstHome: React.FC<IHomePageProps> = ({
       });
     }
   };
-
+  let custom = 0;
   return (
-    <div className={`${styles.wrapper} container`}>
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={MAIN_PAGE_ANIMATION.viewport}
+      variants={MAIN_PAGE_ANIMATION.animationVision}
+      custom={custom++}
+      className={`${styles.wrapper} container`}
+    >
       <div className={styles.content}>
-        <div className={styles.left}>
+        <motion.div
+          custom={custom++}
+          variants={MAIN_PAGE_ANIMATION.animationLeft}
+          className={styles.left}
+        >
           <div className={styles.texts}>
             <h1 className={styles.title}>{block?.texts[0]?.text}</h1>
             <h2 className={styles.text}>{block?.texts[1]?.text}</h2>
@@ -51,8 +64,12 @@ const FirstHome: React.FC<IHomePageProps> = ({
               {t("HomePage.FirstHome.contactButton")}
             </button>
           </div>
-        </div>
-        <div className={styles.image__wrapper}>
+        </motion.div>
+        <motion.div
+          custom={custom++}
+          variants={MAIN_PAGE_ANIMATION.animationRight}
+          className={styles.image__wrapper}
+        >
           <Image
             className={styles.image}
             src={block?.files[0]?.url}
@@ -61,7 +78,7 @@ const FirstHome: React.FC<IHomePageProps> = ({
             height={2000}
             priority
           />
-        </div>
+        </motion.div>
       </div>
       {isAdmin && pageId && (
         <ContentAdminEdit
@@ -71,7 +88,7 @@ const FirstHome: React.FC<IHomePageProps> = ({
           lng={lng}
         />
       )}
-    </div>
+    </motion.div>
   );
 };
 

@@ -10,6 +10,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "../styles/SeventhHome.module.scss";
+import { MAIN_PAGE_ANIMATION } from "@/types/animation";
+import { motion } from "framer-motion";
 
 const SeventhHome: React.FC<IHomePageProps> = ({
   section,
@@ -19,12 +21,29 @@ const SeventhHome: React.FC<IHomePageProps> = ({
 }) => {
   const { t } = useTranslation(lng);
   const firstBlock = section?.blocks[0];
-
+  let custom = 0;
   return (
-    <div id={scrollEnum.clients} className={`${styles.wrapper} container`}>
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={MAIN_PAGE_ANIMATION.viewport}
+      variants={MAIN_PAGE_ANIMATION.animationVision}
+      id={scrollEnum.clients}
+      className={`${styles.wrapper} container`}
+    >
       <div className={styles.top}>
-        <h2 className={styles.title}>{t("HomePage.SeventhHome.title")}</h2>
-        <div className={styles.image__wrapper}>
+        <motion.h2
+          custom={custom++}
+          variants={MAIN_PAGE_ANIMATION.animationVision}
+          className={styles.title}
+        >
+          {t("HomePage.SeventhHome.title")}
+        </motion.h2>
+        <motion.div
+          custom={custom++}
+          variants={MAIN_PAGE_ANIMATION.animationRight}
+          className={styles.image__wrapper}
+        >
           <Image
             src={firstBlock?.files[0]?.url}
             alt={firstBlock?.files[0]?.alts[0]?.text}
@@ -32,7 +51,7 @@ const SeventhHome: React.FC<IHomePageProps> = ({
             height={480}
             priority
           />
-        </div>
+        </motion.div>
         {isAdmin && pageId && (
           <>
             <div></div>
@@ -44,7 +63,12 @@ const SeventhHome: React.FC<IHomePageProps> = ({
       </div>
       <div className={styles.bottom}>
         {section?.blocks.slice(1).map((block, index) => (
-          <div className={styles.partner} key={index}>
+          <motion.div
+            custom={custom++}
+            variants={MAIN_PAGE_ANIMATION.animationUp}
+            className={styles.partner}
+            key={index}
+          >
             <Image
               className={styles.image}
               src={block?.files[0]?.url}
@@ -58,10 +82,14 @@ const SeventhHome: React.FC<IHomePageProps> = ({
                 <ContentAdminEdit block={block} pageId={pageId} lng={lng} />
               </div>
             )}
-          </div>
+          </motion.div>
         ))}
       </div>
-      <div className={`${styles.carousel} main__swiper__wrapper`}>
+      <motion.div
+        custom={custom++}
+        variants={MAIN_PAGE_ANIMATION.animationVision}
+        className={`${styles.carousel} main__swiper__wrapper`}
+      >
         <Swiper
           slidesPerView={1}
           loop={true}
@@ -92,8 +120,8 @@ const SeventhHome: React.FC<IHomePageProps> = ({
             </SwiperSlide>
           ))}
         </Swiper>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

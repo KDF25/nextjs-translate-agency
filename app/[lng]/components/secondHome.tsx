@@ -2,8 +2,10 @@
 
 import ContentAdminEdit from "@/app/admin/components/contentAdminEdit";
 import { useTranslation } from "@/app/i18n/client";
+import { MAIN_PAGE_ANIMATION } from "@/types/animation";
 import { SCROLL_OFFSET, scrollEnum } from "@/types/constansts";
 import { IBlock, IHomePageProps } from "@/types/user";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import "swiper/css";
@@ -63,13 +65,30 @@ const SecondHome: React.FC<IHomePageProps> = ({
     }
   };
   console.log(isVisible);
+
+  let custom = 0;
   return (
-    <div id={scrollEnum.services} className={`${styles.wrapper} container`}>
-      <h2 className={styles.title}>{t("HomePage.SecondHome.title")}</h2>
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={MAIN_PAGE_ANIMATION.viewport}
+      variants={MAIN_PAGE_ANIMATION.animationVision}
+      id={scrollEnum.services}
+      className={`${styles.wrapper} container`}
+    >
+      <motion.h2
+        custom={custom++}
+        variants={MAIN_PAGE_ANIMATION.animationVision}
+        className={styles.title}
+      >
+        {t("HomePage.SecondHome.title")}
+      </motion.h2>
       <div className={styles.information}>
         <div className={styles.tab__wrapper}>
           {section?.blocks.map((block, index) => (
-            <div
+            <motion.div
+              custom={custom++}
+              variants={MAIN_PAGE_ANIMATION.animationUp}
               key={index}
               className={`${styles.tab} ${
                 block === activeBlock ? styles.active : ""
@@ -85,10 +104,13 @@ const SecondHome: React.FC<IHomePageProps> = ({
                 <p>{block.texts[0].text}</p>
               </div>
               <span>{block.texts[1].text}</span>
-            </div>
+            </motion.div>
           ))}
         </div>
-        <div
+        <motion.div
+          custom={custom++}
+          variants={MAIN_PAGE_ANIMATION.animationUp}
+          // className={styles.content__wrapper}
           className={`${styles.content__wrapper} ${
             isVisible ? styles.no_hidden : styles.hidden
           }`}
@@ -119,7 +141,7 @@ const SecondHome: React.FC<IHomePageProps> = ({
               />
             )}
           </div>
-        </div>
+        </motion.div>
         <div className={`${styles.order__wrapper} ${styles.mobile}`}>
           <button
             className={styles.order}
@@ -134,7 +156,7 @@ const SecondHome: React.FC<IHomePageProps> = ({
           <ContentAdminEdit block={activeBlock!} pageId={pageId} lng={lng} />
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 export default SecondHome;

@@ -2,8 +2,10 @@
 
 import { useTranslation } from "@/app/i18n/client";
 import { sendMail, sendMailFile } from "@/services/user";
+import { MAIN_PAGE_ANIMATION } from "@/types/animation";
 import { scrollEnum } from "@/types/constansts";
 import { ILangPageProps, IMailData } from "@/types/user";
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { BasketIcon, FileIcon, FolderIcon, YesIcon } from "../icons";
@@ -89,12 +91,27 @@ const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
     reset();
   };
 
-  console.log(files);
-
+  let custom = 0;
   return (
-    <div id={scrollEnum.form} className={`${styles.wrapper} container`}>
-      <h2 className={styles.title}>{t("HomePage.FifthHome.title")}</h2>
-      <div>
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={MAIN_PAGE_ANIMATION.viewport}
+      variants={MAIN_PAGE_ANIMATION.animationVision}
+      id={scrollEnum.form}
+      className={`${styles.wrapper} container`}
+    >
+      <motion.h2
+        custom={custom++}
+        variants={MAIN_PAGE_ANIMATION.animationVision}
+        className={styles.title}
+      >
+        {t("HomePage.FifthHome.title")}
+      </motion.h2>
+      <motion.div
+        custom={custom++}
+        variants={MAIN_PAGE_ANIMATION.animationUp}
+      >
         <form
           action=""
           className={styles.form__wrapper}
@@ -215,8 +232,8 @@ const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
             {t("HomePage.FifthHome.sendButton")}
           </button>
         </form>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
