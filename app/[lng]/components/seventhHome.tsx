@@ -93,7 +93,7 @@ const SeventhHome: React.FC<IHomePageProps> = ({
       </motion.div>
       <motion.div
         custom={custom++}
-        variants={MAIN_PAGE_ANIMATION.animationVision}
+        variants={MAIN_PAGE_ANIMATION.animationUp}
         className={`${styles.carousel} main__swiper__wrapper`}
       >
         <Swiper

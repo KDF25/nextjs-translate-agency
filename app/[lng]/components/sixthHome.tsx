@@ -42,27 +42,38 @@ const SixthHome: React.FC<ILangPageProps> = ({ lng }) => {
     initMap();
   }, []);
   let custom = 0;
+  let custom2 = 0;
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={MAIN_PAGE_ANIMATION.viewport}
-      variants={MAIN_PAGE_ANIMATION.animationVision}
-      id={scrollEnum.contacts}
-      className={`${styles.wrapper} container`}
-    >
+    <div id={scrollEnum.contacts} className={`${styles.wrapper} container`}>
       <motion.h2
+        initial="hidden"
+        whileInView="visible"
+        viewport={MAIN_PAGE_ANIMATION.viewport}
+        variants={MAIN_PAGE_ANIMATION.animationVision}
         custom={custom++}
-        variants={MAIN_PAGE_ANIMATION.animationUp}
         className={styles.title}
       >
         {t("HomePage.SixthHome.title")}
       </motion.h2>
       <div className={styles.content}>
-        <div className={styles.left} ref={mapRef}></div>
-        <div className={styles.right}>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={MAIN_PAGE_ANIMATION.viewport}
+          variants={MAIN_PAGE_ANIMATION.animationLeft}
+          custom={custom++}
+          className={styles.left}
+          ref={mapRef}
+        ></motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={MAIN_PAGE_ANIMATION.viewport}
+          variants={MAIN_PAGE_ANIMATION.animationVision}
+          className={styles.right}
+        >
           <motion.div
-            custom={(custom += 3)}
+            custom={(custom2 += 2)}
             variants={MAIN_PAGE_ANIMATION.animationRight}
             className={styles.contact}
           >
@@ -75,7 +86,7 @@ const SixthHome: React.FC<ILangPageProps> = ({ lng }) => {
             </div>
           </motion.div>
           <motion.div
-            custom={custom++}
+            custom={(custom2 += 2)}
             variants={MAIN_PAGE_ANIMATION.animationRight}
             className={styles.contact}
           >
@@ -85,7 +96,7 @@ const SixthHome: React.FC<ILangPageProps> = ({ lng }) => {
             <p>{EMAIL}</p>
           </motion.div>
           <motion.div
-            custom={custom++}
+            custom={(custom2 += 2)}
             variants={MAIN_PAGE_ANIMATION.animationRight}
             className={styles.contact}
           >
@@ -99,9 +110,9 @@ const SixthHome: React.FC<ILangPageProps> = ({ lng }) => {
               }}
             />
           </motion.div>
-        </div>
+        </motion.div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 export default SixthHome;
