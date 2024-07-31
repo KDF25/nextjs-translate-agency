@@ -53,7 +53,7 @@ const SixthHome: React.FC<ILangPageProps> = ({ lng }) => {
     >
       <motion.h2
         custom={custom++}
-        variants={MAIN_PAGE_ANIMATION.animationVision}
+        variants={MAIN_PAGE_ANIMATION.animationUp}
         className={styles.title}
       >
         {t("HomePage.SixthHome.title")}
@@ -62,7 +62,7 @@ const SixthHome: React.FC<ILangPageProps> = ({ lng }) => {
         <div className={styles.left} ref={mapRef}></div>
         <div className={styles.right}>
           <motion.div
-            custom={custom++}
+            custom={(custom += 3)}
             variants={MAIN_PAGE_ANIMATION.animationRight}
             className={styles.contact}
           >

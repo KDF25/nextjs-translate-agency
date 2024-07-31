@@ -97,7 +97,6 @@ const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
       initial="hidden"
       whileInView="visible"
       viewport={MAIN_PAGE_ANIMATION.viewport}
-      variants={MAIN_PAGE_ANIMATION.animationVision}
       id={scrollEnum.form}
       className={`${styles.wrapper} container`}
     >

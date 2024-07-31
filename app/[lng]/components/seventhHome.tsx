@@ -2,16 +2,16 @@
 
 import ContentAdminEdit from "@/app/admin/components/contentAdminEdit";
 import { useTranslation } from "@/app/i18n/client";
+import { MAIN_PAGE_ANIMATION } from "@/types/animation";
 import { scrollEnum } from "@/types/constansts";
 import { IHomePageProps } from "@/types/user";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "../styles/SeventhHome.module.scss";
-import { MAIN_PAGE_ANIMATION } from "@/types/animation";
-import { motion } from "framer-motion";
 
 const SeventhHome: React.FC<IHomePageProps> = ({
   section,
@@ -22,16 +22,16 @@ const SeventhHome: React.FC<IHomePageProps> = ({
   const { t } = useTranslation(lng);
   const firstBlock = section?.blocks[0];
   let custom = 0;
+  let custom2 = 0;
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={MAIN_PAGE_ANIMATION.viewport}
-      variants={MAIN_PAGE_ANIMATION.animationVision}
-      id={scrollEnum.clients}
-      className={`${styles.wrapper} container`}
-    >
-      <div className={styles.top}>
+    <div id={scrollEnum.clients} className={`${styles.wrapper} container`}>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={MAIN_PAGE_ANIMATION.viewport}
+        variants={MAIN_PAGE_ANIMATION.animationVision}
+        className={styles.top}
+      >
         <motion.h2
           custom={custom++}
           variants={MAIN_PAGE_ANIMATION.animationVision}
@@ -60,11 +60,17 @@ const SeventhHome: React.FC<IHomePageProps> = ({
             </div>
           </>
         )}
-      </div>
-      <div className={styles.bottom}>
+      </motion.div>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={MAIN_PAGE_ANIMATION.viewport}
+        variants={MAIN_PAGE_ANIMATION.animationVision}
+        className={styles.bottom}
+      >
         {section?.blocks.slice(1).map((block, index) => (
           <motion.div
-            custom={custom++}
+            custom={custom2++}
             variants={MAIN_PAGE_ANIMATION.animationUp}
             className={styles.partner}
             key={index}
@@ -84,7 +90,7 @@ const SeventhHome: React.FC<IHomePageProps> = ({
             )}
           </motion.div>
         ))}
-      </div>
+      </motion.div>
       <motion.div
         custom={custom++}
         variants={MAIN_PAGE_ANIMATION.animationVision}
@@ -121,7 +127,7 @@ const SeventhHome: React.FC<IHomePageProps> = ({
           ))}
         </Swiper>
       </motion.div>
-    </motion.div>
+    </div>
   );
 };
 
