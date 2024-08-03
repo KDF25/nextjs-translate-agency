@@ -100,10 +100,14 @@
 
       @media (max-width: 768px) {
         width: 85%;
-        padding: 15px 12px;
+        padding: 15px 20px;
         height: 350px;
         border-radius: 25px; 
       }
+      // @media (max-width: 576px) {
+      //   padding: 15px 12px;
+      // }
+      
   
       &.card_1{
         background: #3289C7;
@@ -177,7 +181,10 @@
 
         @media (max-width: 768px) {
           justify-items: center;
-          row-gap: 25px;
+        }
+
+        @media (max-width: 576px) {
+          row-gap: 15px;
         }
   
         p{
@@ -219,10 +226,10 @@
           @media (max-width: 768px) {
             font-size: var(--font-size-text-secondary-md);
           }
-      
-          @media (max-width: 376px) {
+          @media (max-width: 576px) {
             font-size: var(--font-size-text-secondary-xs);
           }
+
         }
       }
     }
