@@ -24,7 +24,6 @@
         line-height: normal;
         padding-left: 100px;
         position: relative;
-
         font-size: var(--font-size-subtitle-main-xl);
 
         @media (max-width: 992px) {
@@ -282,19 +281,6 @@
                         line-height: normal;
                         color: var(--color-black);
 
-                        font-size: var(--font-size-option-item-xl);
-
-                        @media (max-width: 992px) {
-                          font-size: var(--font-size-option-item-lg);
-                        }
-                    
-                        @media (max-width: 768px) {
-                          font-size: var(--font-size-option-item-md);
-                        }
-                    
-                        @media (max-width: 376px) {
-                          font-size: var(--font-size-option-item-xs);
-                        }
                     }
 
                     span{
@@ -302,19 +288,7 @@
                         font-style: normal;
                         font-weight: 500;
                         line-height: normal;
-                        font-size: var(--font-size-text-main-xl);
-
-                        @media (max-width: 992px) {
-                          font-size: var(--font-size-text-main-lg);
-                        }
-                    
-                        @media (max-width: 768px) {
-                          font-size: var(--font-size-text-main-md);
-                        }
-                    
-                        @media (max-width: 376px) {
-                          font-size: var(--font-size-text-main-xs);
-                        }
+                        font-size: 16px;
                     }
                 }
             }
