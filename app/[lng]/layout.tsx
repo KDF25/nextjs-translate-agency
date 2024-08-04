@@ -9,13 +9,14 @@ import "./../styles/global.scss";
 export const metadata: Metadata = {
   title: "Vip-perevod",
   description: "Vip-perevod",
-  // metadataBase: new URL(process.env.NEXT_PUBLIC_API_BASE_URL || ""),
-  metadataBase: new URL("https://translate-agency.vercel.app" || ""),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_API_BASE_URL || ""),
+  // metadataBase: new URL("https://translate-agency.vercel.app" || ""),
   openGraph: {
     title: "Vip-perevod",
     description:
       "Vip-perevod - ваш надежный партнер в точных и оперативных переводческих услугах. От документов до сайтов, мы преодолеваем языковые барьеры с профессионализмом и точностью.",
-    url: "https://translate-agency.vercel.app",
+    // url: "https://translate-agency.vercel.app",
+    url: process.env.NEXT_PUBLIC_API_BASE_URL,
     siteName: "Vip-perevod",
     images: [
       {

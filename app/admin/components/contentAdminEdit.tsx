@@ -2,6 +2,7 @@
 
 import { languageEnum } from "@/app/i18n/settings";
 import {
+  getRevalidate,
   putContentAlt,
   putContentFile,
   putContentText,
@@ -99,6 +100,9 @@ const ContentAdminEdit: React.FC<ContentAdminEditProps> = ({
         putContentAlt(altStates);
       }
     }
+    getRevalidate("/ru");
+    getRevalidate("/en");
+    getRevalidate("/uz");
     router.push("/admin");
   };
 
@@ -153,23 +157,18 @@ const ContentAdminEdit: React.FC<ContentAdminEditProps> = ({
                 </div>
               ))}
             {block?.texts[0]?.text &&
-              block?.texts.map(
-                (text, index) => (
-                  console.log(textStates, textStates[index]?.text),
-                  (
-                    <label key={index}>
-                      <span>Edit text: {index + 1}</span>
-                      <input
-                        type="text"
-                        value={textStates[index]?.text || ""}
-                        onChange={(event) =>
-                          handleChangeText(textStates[index]?.id, event)
-                        }
-                      />
-                    </label>
-                  )
-                )
-              )}
+              block?.texts.map((text, index) => (
+                <label key={index}>
+                  <span>Edit text: {index + 1}</span>
+                  <input
+                    type="text"
+                    value={textStates[index]?.text || ""}
+                    onChange={(event) =>
+                      handleChangeText(textStates[index]?.id, event)
+                    }
+                  />
+                </label>
+              ))}
             <input
               className={styles.changeBtn}
               type="submit"

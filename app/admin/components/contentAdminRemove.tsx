@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteBlock } from "@/services/admin";
+import { deleteBlock, getRevalidate } from "@/services/admin";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from "../styles/AuthAdmin.module.scss";
@@ -19,6 +19,9 @@ export default function ContentAdminRemove({
 
   const handleDelete = () => {
     deleteBlock(blockId);
+    getRevalidate("/ru");
+    getRevalidate("/en");
+    getRevalidate("/uz");
     router.push("/admin");
   };
 

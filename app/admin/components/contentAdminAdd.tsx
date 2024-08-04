@@ -1,11 +1,12 @@
 "use client";
 
 import { languages } from "@/app/i18n/settings";
-import { addAlt, addBlock, addFile, addText } from "@/services/admin";
+import { addAlt, addBlock, addFile, addText, getRevalidate } from "@/services/admin";
 import { IBlock, IText } from "@/types/user";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import styles from "../styles/AuthAdmin.module.scss";
+import { PAGE_ID } from "@/config";
 
 interface Props {
   block: IBlock;
@@ -73,11 +74,17 @@ const ContentAdminAdd: React.FC<Props> = ({ block, sectionId, pageId }) => {
           addText(data.block_id, addedTextStates);
         }
       });
+      getRevalidate("/ru");
+      getRevalidate("/en");
+      getRevalidate("/uz");
       router.push("/admin");
     } else {
       addBlock(sectionId).then((data: { block_id: number }) => {
         addText(data.block_id, addedTextStates);
       });
+      getRevalidate("/ru");
+      getRevalidate("/en");
+      getRevalidate("/uz");
       router.push("/admin");
     }
   };

@@ -25,7 +25,7 @@ const AdminLayout: FC<AdminLayoutProps> = ({ children }) => {
   const closeAdmin = () => {
     localStorage.removeItem("isAuth");
     localStorage.removeItem("token");
-    router.push("/");
+    router.push("/uz");
   };
 
   return (

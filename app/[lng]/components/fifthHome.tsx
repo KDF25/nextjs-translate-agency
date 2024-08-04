@@ -81,7 +81,6 @@ const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
   };
 
   const onSubmit = (data: IMailData) => {
-    console.log;
     if (data?.file) {
       sendMailFile(data.name, data.phoneNumber, data.email, data.file);
     } else {

@@ -64,8 +64,6 @@ const SecondHome: React.FC<IHomePageProps> = ({
       });
     }
   };
-  console.log(isVisible);
-
   let custom = 0;
   return (
     <motion.div
