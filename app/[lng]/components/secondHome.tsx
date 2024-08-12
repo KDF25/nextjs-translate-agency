@@ -99,9 +99,9 @@ const SecondHome: React.FC<IHomePageProps> = ({
                 >
                   {icons[index]}
                 </div>
-                <p>{block.texts[0].text}</p>
+                <p>{block?.texts[0]?.text}</p>
               </div>
-              <span>{block.texts[1].text}</span>
+              <span>{block?.texts[1]?.text}</span>
             </motion.div>
           ))}
         </div>
@@ -115,8 +115,8 @@ const SecondHome: React.FC<IHomePageProps> = ({
         >
           <div className={styles.left}>
             <div className={styles.texts}>
-              <p>{activeBlock?.texts[0].text}</p>
-              <span>{activeBlock?.texts[1].text}</span>
+              <p>{activeBlock?.texts[0]?.text}</p>
+              <span>{activeBlock?.texts[1]?.text}</span>
             </div>
             <div className={styles.order__wrapper}>
               <button
@@ -131,8 +131,8 @@ const SecondHome: React.FC<IHomePageProps> = ({
             {activeBlock && (
               <Image
                 className={styles.image}
-                src={activeBlock.files[0].url}
-                alt={activeBlock.files[0].alts[0].text}
+                src={activeBlock?.files[0]?.url}
+                alt={activeBlock?.files[0]?.alts[0]?.text}
                 width={485}
                 height={425}
                 priority

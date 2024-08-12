@@ -116,7 +116,7 @@ const FourthHome: React.FC<IHomePageProps> = ({
                 <ReactPlayer
                   className={styles.player}
                   light
-                  url={block?.texts[0].text}
+                  url={block?.texts[0]?.text}
                   playing
                   controls
                   ref={(ref) => {
