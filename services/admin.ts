@@ -41,7 +41,7 @@ export const putContentText = async ( text: {
   text: string,
 }[]) => {
   try {
-    const { data } = await $authHost.put("/page/block/text",  text
+    const { data } = await $authHost.put("/translation/api/page/block/text",  text
   );
     return data;
   } catch (error) {
