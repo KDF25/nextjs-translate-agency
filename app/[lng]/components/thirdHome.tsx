@@ -65,7 +65,7 @@ const ThirdHome: React.FC<IHomePageProps> = ({
           <Image
             className={styles.image}
             src={section?.blocks?.[0].files[0]?.url}
-            alt={section?.blocks?.[0].files[0]?.alts[0]?.text}
+            alt={section?.blocks?.[0].files[0]?.alts[0]?.text || "image"}
             width={475}
             height={445}
             priority
@@ -111,7 +111,7 @@ const ThirdHome: React.FC<IHomePageProps> = ({
                   <div className="admin__change">
                     <ContentAdminEdit block={block} pageId={pageId} lng={lng} />
                     {section.blocks?.length > 2 ? (
-                      <ContentAdminRemove blockId={block.id} pageId={pageId} />
+                      <ContentAdminRemove blockId={block?.id} pageId={pageId} />
                     ) : (
                       <span>Последний блок удалять нельзя</span>
                     )}
@@ -130,8 +130,8 @@ const ThirdHome: React.FC<IHomePageProps> = ({
             lng={lng}
           />
           <ContentAdminAdd
-            sectionId={section.id}
-            block={section.blocks[1]}
+            sectionId={section?.id}
+            block={section?.blocks[1]}
             pageId={pageId}
           />
         </div>

@@ -160,8 +160,8 @@ export const deleteBlock = async (blockId: number) => {
 export const getRevalidate = async (path: string) => {
   try {
     const response = await fetch(
-      // `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/revalidate?path=${path}`
-      `http://localhost:3000/api/revalidate?path=${path}`
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/revalidate?path=${path}`
+      // `http://localhost:3000/api/revalidate?path=${path}`
     );
     return response;
   } catch (error) {

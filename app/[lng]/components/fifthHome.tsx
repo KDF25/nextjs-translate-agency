@@ -86,7 +86,6 @@ const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
     } else {
       sendMail(data.name, data.phoneNumber, data.email);
     }
-    alert(t("FifthHome.alert"));
     reset();
   };
 

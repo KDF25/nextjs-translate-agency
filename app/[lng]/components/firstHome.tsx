@@ -73,7 +73,7 @@ const FirstHome: React.FC<IHomePageProps> = ({
           <Image
             className={styles.image}
             src={block?.files[0]?.url}
-            alt={block?.files[0]?.alts[0]?.text}
+            alt={block?.files[0]?.alts[0]?.text || "image"}
             width={2000}
             height={2000}
             priority
@@ -82,7 +82,7 @@ const FirstHome: React.FC<IHomePageProps> = ({
       </div>
       {isAdmin && pageId && (
         <ContentAdminEdit
-          key={block.id}
+          key={block?.id}
           block={block}
           pageId={pageId}
           lng={lng}

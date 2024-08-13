@@ -132,7 +132,7 @@ const SecondHome: React.FC<IHomePageProps> = ({
               <Image
                 className={styles.image}
                 src={activeBlock?.files[0]?.url}
-                alt={activeBlock?.files[0]?.alts[0]?.text}
+                alt={activeBlock?.files[0]?.alts[0]?.text || "image"}
                 width={485}
                 height={425}
                 priority

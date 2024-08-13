@@ -53,7 +53,7 @@ const ContentAdminEdit: React.FC<ContentAdminEditProps> = ({
   ) => {
     const newText = event.target.value;
     const newTextStates = textStates.map((item) => {
-      if (item.id === index) {
+      if (item?.id === index) {
         return { ...item, text: newText };
       }
       return item;
@@ -67,7 +67,7 @@ const ContentAdminEdit: React.FC<ContentAdminEditProps> = ({
   ) => {
     const newAlt = event.target.value;
     const newAltStates = altStates.map((item) => {
-      if (item.id === index) {
+      if (item?.id === index) {
         return { ...item, text: newAlt };
       }
       return item;
@@ -82,11 +82,11 @@ const ContentAdminEdit: React.FC<ContentAdminEditProps> = ({
     }
     if (block?.texts[0]?.text) {
       const texts = block?.texts.map((item) => ({
-        id: item.id,
+        id: item?.id,
         text: item.text,
       }));
       const alts = block?.files[0]?.alts.map((item) => ({
-        id: item.id,
+        id: item?.id,
         text: item.text,
       }));
 
@@ -109,15 +109,15 @@ const ContentAdminEdit: React.FC<ContentAdminEditProps> = ({
   useEffect(() => {
     if (block?.texts[0]?.text) {
       const texts = block?.texts.map((item) => ({
-        id: item.id,
+        id: item?.id,
         text: item.text,
       }));
       setTextStates(texts);
     }
     if (block?.files[0]?.id) {
       const initialAltStates = block.files.map((file) => ({
-        id: file.alts[0].id,
-        text: file.alts[0].text,
+        id: file.alts[0]?.id,
+        text: file.alts[0]?.text,
       }));
       setAltStates(initialAltStates);
     }
@@ -130,7 +130,7 @@ const ContentAdminEdit: React.FC<ContentAdminEditProps> = ({
             {block?.files[0]?.id &&
               block?.files.map((file, index) => (
                 <div
-                  key={file.id}
+                  key={file?.id}
                   style={{
                     display: "grid",
                     gridTemplate: "1fr 1fr / 1fr",
@@ -141,7 +141,7 @@ const ContentAdminEdit: React.FC<ContentAdminEditProps> = ({
                     <span>Edit file:</span>
                     <input
                       type="file"
-                      onChange={(event) => handleChangeFile(event, file.id)}
+                      onChange={(event) => handleChangeFile(event, file?.id)}
                     />
                   </label>
                   <label>

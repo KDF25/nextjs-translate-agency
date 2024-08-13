@@ -127,10 +127,10 @@ const FourthHome: React.FC<IHomePageProps> = ({
                 {isAdmin && pageId && (
                   <div className={`admin__change ${styles.admin}`}>
                     <ContentAdminEdit block={block} pageId={pageId} lng={lng} />
-                    <ContentAdminRemove blockId={block.id} pageId={pageId} />
+                    <ContentAdminRemove blockId={block?.id} pageId={pageId} />
                     <ContentAdminAdd
-                      sectionId={section.id}
-                      block={section.blocks[1]}
+                      sectionId={section?.id}
+                      block={section?.blocks[1]}
                       pageId={pageId}
                     />
                   </div>

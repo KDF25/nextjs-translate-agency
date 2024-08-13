@@ -55,7 +55,7 @@ const ContentAdminAdd: React.FC<Props> = ({ block, sectionId, pageId }) => {
   ) => {
     const text = event.target.value;
     const newAddData: IText[] = addedTextStates.map((item) => {
-      if (item.id === index && item.language === lang) {
+      if (item?.id === index && item.language === lang) {
         return { ...item, text: text };
       }
       return item;
@@ -114,7 +114,7 @@ const ContentAdminAdd: React.FC<Props> = ({ block, sectionId, pageId }) => {
           <form onSubmit={handleSubmit} className={styles.admin__wrapper}>
             {block?.files[0]?.id &&
               block?.files.map((file: any, index: number) => (
-                <div className={styles.admin__wrapper} key={file.id}>
+                <div className={styles.admin__wrapper} key={file?.id}>
                   <label>
                     <span>Add file:</span>
                     <input
@@ -130,7 +130,7 @@ const ContentAdminAdd: React.FC<Props> = ({ block, sectionId, pageId }) => {
                         value={
                           addedTextStates.find(
                             (item) =>
-                              item.id === index && item.language === lang
+                              item?.id === index && item.language === lang
                           )?.text || ""
                         }
                         onChange={(event) => handleChangeAlt(lang, event)}
@@ -141,7 +141,7 @@ const ContentAdminAdd: React.FC<Props> = ({ block, sectionId, pageId }) => {
               ))}
             {block?.texts[0]?.id &&
               block?.texts.map((text: any, index: number) => (
-                <div key={text.id} className={styles.admin__wrapper}>
+                <div key={text?.id} className={styles.admin__wrapper}>
                   {languages.map((lang) => (
                     <label key={lang}>
                       <span>
@@ -152,7 +152,7 @@ const ContentAdminAdd: React.FC<Props> = ({ block, sectionId, pageId }) => {
                         value={
                           addedTextStates.find(
                             (item) =>
-                              item.id === index && item.language === lang
+                              item?.id === index && item.language === lang
                           )?.text || ""
                         }
                         onChange={(event) =>

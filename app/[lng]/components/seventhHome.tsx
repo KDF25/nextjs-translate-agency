@@ -46,7 +46,7 @@ const SeventhHome: React.FC<IHomePageProps> = ({
         >
           <Image
             src={firstBlock?.files[0]?.url}
-            alt={firstBlock?.files[0]?.alts[0]?.text}
+            alt={firstBlock?.files[0]?.alts[0]?.text || "image"}
             width={525}
             height={480}
             priority
@@ -78,7 +78,7 @@ const SeventhHome: React.FC<IHomePageProps> = ({
             <Image
               className={styles.image}
               src={block?.files[0]?.url}
-              alt={block?.files[0]?.alts[0]?.text}
+              alt={block?.files[0]?.alts[0]?.text || "image"}
               width={300}
               height={150}
               priority
@@ -113,7 +113,7 @@ const SeventhHome: React.FC<IHomePageProps> = ({
               <Image
                 className={styles.image}
                 src={block?.files[0]?.url}
-                alt={block?.files[0]?.alts[0]?.text}
+                alt={block?.files[0]?.alts[0]?.text || "image"}
                 width={300}
                 height={150}
                 priority

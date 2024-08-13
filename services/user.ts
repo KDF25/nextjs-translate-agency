@@ -5,11 +5,7 @@ export const sendMail = async (
     phone: string,
     email: string,
   ) => {
-    const { data } = await $host.post(`/translation/application/text`, {
-      name: name,
-      phone: phone,
-      email: email,
-    });
+    const { data } = await $host.post(`/translation/api/application/text?name=${name}&phone=${phone}&email=${email}`);
     return data;
   };
   
