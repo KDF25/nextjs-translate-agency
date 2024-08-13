@@ -3,7 +3,7 @@ import { IUserData } from "@/types/user";
 
 export const getData = async (id: number, lang: languageEnum) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/translation/api/user/page?page_id=${id}&language=${lang}`, {
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/translation/api/user/page/?page_id=${id}&language=${lang}`, {
       next: {
         revalidate: 3540
       }
