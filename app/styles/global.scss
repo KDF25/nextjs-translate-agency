@@ -206,18 +206,19 @@ header{
     height: 100px;
     left: 70% !important;
     top: 210px !important;
+    -webkit-tap-highlight-color: transparent;
 
     &::after{
       content: "" !important;
     }
 
-    @media (max-width: 992px) {
-      cursor: auto;
-    }
+    // @media (max-width: 992px) {
+    //   cursor: auto;
+    // }
 
-    @media (max-width: 768px) {
-      display: none;
-    }
+    // @media (max-width: 768px) {
+    //   display: none;
+    // }
 
   }
 

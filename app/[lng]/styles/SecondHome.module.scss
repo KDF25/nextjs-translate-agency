@@ -104,6 +104,7 @@
                 row-gap: 35px;
                 cursor: pointer;
                 transition: background 0.3s ease, transform 0.3s ease;
+                -webkit-tap-highlight-color: transparent;
 
                 &.active{
                     background: #C6EFFF;
