@@ -165,6 +165,7 @@
           p{
             background: #2D92DC;
             color: var(--color-white);
+            text-align: center;
           }
           span{
             color: rgba(0, 0, 0, 0.80);
@@ -224,6 +225,7 @@
           }
       
           @media (max-width: 768px) {
+            -webkit-line-clamp: 13;
             font-size: var(--font-size-text-secondary-md);
           }
           @media (max-width: 576px) {
