@@ -26,7 +26,7 @@
 
     @media (max-width: 768px) {
       top: -390px;
-      height: 1380px;
+      height: 1385px;
       background: url('./../../../public/background-1-2.svg');
       background-size: cover; 
     }
@@ -155,7 +155,7 @@
               background: #C5FAFF;
               padding: 18px 50px;
 
-              &:hover {
+              &:active {
                 background: hsl(185, 100%, 97%);
               }
             }
@@ -164,20 +164,17 @@
               background: #FFCD6C;
               padding: 18px 30px;
 
-              &:hover {
+              &:active {
                 background: hsl(70, 100%, 81%);
               }
             }
 
             transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-            &:hover {
-              transform: scale(1.03);
-              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            }
-
             &:active {
               transform: scale(0.9);
+              transform: scale(1.03);
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             }
   
           }

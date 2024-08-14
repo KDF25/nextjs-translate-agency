@@ -113,7 +113,7 @@
                     }
                 }
 
-                &:hover{
+                &:active{
                   background: #C6EFFF;
                   transform: scale(1.03);
 
@@ -315,7 +315,7 @@
         color: var(--color-white);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-        &:hover {
+        &:active {
           transform: scale(1.03);
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
           background: hsla(354, 100%, 74%, 0.85);

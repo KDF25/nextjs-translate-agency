@@ -80,13 +80,14 @@ const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
     handleReset();
   };
 
-  const onSubmit = (data: IMailData) => {
+  const onSubmit = async (data: IMailData) => {
     if (data?.file) {
-      sendMailFile(data.name, data.phoneNumber, data.email, data.file);
+      await sendMailFile(data.name, data.phoneNumber, data.email, data.file);
     } else {
-      sendMail(data.name, data.phoneNumber, data.email);
+      await sendMail(data.name, data.phoneNumber, data.email);
     }
-    reset();
+    alert(t("HomePage.FifthHome.alert"));
+    reset(); // Сброс формы после успешной отправки
   };
 
   let custom = 0;
@@ -105,10 +106,7 @@ const FifthHome: React.FC<ILangPageProps> = ({ lng }) => {
       >
         {t("HomePage.FifthHome.title")}
       </motion.h2>
-      <motion.div
-        custom={custom++}
-        variants={MAIN_PAGE_ANIMATION.animationUp}
-      >
+      <motion.div custom={custom++} variants={MAIN_PAGE_ANIMATION.animationUp}>
         <form
           action=""
           className={styles.form__wrapper}

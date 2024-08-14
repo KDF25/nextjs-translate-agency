@@ -217,7 +217,7 @@
           -webkit-box-orient: vertical;
           overflow: hidden;
           text-overflow: ellipsis;
-          -webkit-line-clamp: 10;
+          -webkit-line-clamp: 8;
 
           @media (max-width: 992px) {
             font-size: var(--font-size-text-secondary-lg);
@@ -257,7 +257,7 @@
 
         transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-        &:hover {
+        &:active {
           transform: scale(1.03);
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
           background: hsl(202, 100%, 50%);
