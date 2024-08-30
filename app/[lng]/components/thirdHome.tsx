@@ -62,13 +62,13 @@ const ThirdHome: React.FC<IHomePageProps> = ({
           variants={MAIN_PAGE_ANIMATION.animationLeft}
           className={styles.image__wrapper}
         >
-          <Image
+          <img
             className={styles.image}
             src={section?.blocks?.[0].files[0]?.url}
             alt={section?.blocks?.[0].files[0]?.alts[0]?.text || "image"}
-            width={475}
-            height={445}
-            priority
+            // width={475}
+            // height={445}
+            // priority
           />
         </motion.div>
         <motion.div

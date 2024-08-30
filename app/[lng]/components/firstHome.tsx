@@ -38,9 +38,9 @@ const FirstHome: React.FC<IHomePageProps> = ({
       viewport={MAIN_PAGE_ANIMATION.viewport}
       variants={MAIN_PAGE_ANIMATION.animationVision}
       custom={custom++}
-      className={`${styles.wrapper} container`}
+      className={`${styles.wrapper}`}
     >
-      <div className={styles.content}>
+      <div className={`${styles.content} container`}>
         <motion.div
           custom={custom++}
           variants={MAIN_PAGE_ANIMATION.animationLeft}
@@ -70,13 +70,13 @@ const FirstHome: React.FC<IHomePageProps> = ({
           variants={MAIN_PAGE_ANIMATION.animationRight}
           className={styles.image__wrapper}
         >
-          <Image
+          <img
             className={styles.image}
             src={block?.files[0]?.url}
             alt={block?.files[0]?.alts[0]?.text || "image"}
-            width={2000}
-            height={2000}
-            priority
+            // width={2000}
+            // height={2000}
+            // priority
           />
         </motion.div>
       </div>

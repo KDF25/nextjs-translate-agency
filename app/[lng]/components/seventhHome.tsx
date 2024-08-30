@@ -44,12 +44,12 @@ const SeventhHome: React.FC<IHomePageProps> = ({
           variants={MAIN_PAGE_ANIMATION.animationRight}
           className={styles.image__wrapper}
         >
-          <Image
+          <img
             src={firstBlock?.files[0]?.url}
             alt={firstBlock?.files[0]?.alts[0]?.text || "image"}
-            width={525}
-            height={480}
-            priority
+            // width={525}
+            // height={480}
+            // priority
           />
         </motion.div>
         {isAdmin && pageId && (
@@ -75,13 +75,13 @@ const SeventhHome: React.FC<IHomePageProps> = ({
             className={styles.partner}
             key={index}
           >
-            <Image
+            <img
               className={styles.image}
               src={block?.files[0]?.url}
               alt={block?.files[0]?.alts[0]?.text || "image"}
-              width={300}
-              height={150}
-              priority
+              // width={300}
+              // height={150}
+              // priority
             />
             {isAdmin && pageId && (
               <div>
@@ -110,13 +110,13 @@ const SeventhHome: React.FC<IHomePageProps> = ({
         >
           {section?.blocks?.slice(1).map((block, index) => (
             <SwiperSlide key={index} className={styles.partner}>
-              <Image
+              <img
                 className={styles.image}
                 src={block?.files[0]?.url}
                 alt={block?.files[0]?.alts[0]?.text || "image"}
-                width={300}
-                height={150}
-                priority
+                // width={300}
+                // height={150}
+                // priority
               />
               {isAdmin && pageId && (
                 <div>
