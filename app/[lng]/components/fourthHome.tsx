@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import {
+  EffectCoverflow,
   Navigation,
   Pagination,
   Scrollbar,
@@ -18,6 +19,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import "swiper/css/effect-coverflow";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "../styles/FourthHome.module.scss";
 
@@ -34,13 +36,25 @@ const FourthHome: React.FC<IHomePageProps> = ({
   useEffect(() => {
     setIsClient(true);
   }, []);
-
   const handleSlideChange = (swiper: SwiperType) => {
+    console.log("index222", swiper.activeIndex, swiper.realIndex, swiper);
     playersRef.current.forEach((player, index) => {
-      if (index !== swiper.activeIndex && player) {
+      if (player) {
         const internalPlayer = player.getInternalPlayer();
-        if (internalPlayer && typeof internalPlayer.pauseVideo === "function") {
-          internalPlayer.pauseVideo();
+        if (index === swiper.realIndex) {
+          if (
+            internalPlayer &&
+            typeof internalPlayer.playVideo === "function"
+          ) {
+            internalPlayer.playVideo();
+          }
+        } else {
+          if (
+            internalPlayer &&
+            typeof internalPlayer.pauseVideo === "function"
+          ) {
+            internalPlayer.pauseVideo();
+          }
         }
       }
     });
@@ -77,7 +91,8 @@ const FourthHome: React.FC<IHomePageProps> = ({
           slidesPerView={2}
           loop={true}
           navigation={true}
-          modules={[Navigation, Scrollbar, Pagination]}
+          effect="coverflow"
+          modules={[Navigation, Scrollbar, Pagination, EffectCoverflow]}
           speed={500}
           centeredSlides={true}
           className={`youtube`}
@@ -105,9 +120,16 @@ const FourthHome: React.FC<IHomePageProps> = ({
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
           }}
+          coverflowEffect={{
+            rotate: 0, // Угол поворота слайдов
+            stretch: 0, // Растяжение между слайдами
+            depth: 500, // Глубина отдаления слайдов
+            modifier: 0.75, // Модификатор эффекта
+            slideShadows: false,
+          }}
         >
           {section?.blocks?.map((block, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index} onClick={(e) => e.preventDefault()}>
               <motion.div
                 custom={custom++}
                 variants={MAIN_PAGE_ANIMATION.animationVision}
@@ -117,12 +139,11 @@ const FourthHome: React.FC<IHomePageProps> = ({
                   className={styles.player}
                   light
                   url={block?.texts[0]?.text}
-                  playing
-                  controls
+                  playing={true}
+                  controls={false}
                   ref={(ref) => {
                     playersRef.current[index] = ref;
                   }}
-                  style={{ pointerEvents: "auto" }}
                 />
                 {isAdmin && pageId && (
                   <div className={`admin__change ${styles.admin}`}>
