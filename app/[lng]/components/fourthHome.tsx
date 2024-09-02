@@ -129,7 +129,7 @@ const FourthHome: React.FC<IHomePageProps> = ({
           }}
         >
           {section?.blocks?.map((block, index) => (
-            <SwiperSlide key={index} onClick={(e) => e.preventDefault()}>
+            <SwiperSlide key={index}>
               <motion.div
                 custom={custom++}
                 variants={MAIN_PAGE_ANIMATION.animationVision}
@@ -139,7 +139,7 @@ const FourthHome: React.FC<IHomePageProps> = ({
                   className={styles.player}
                   light
                   url={block?.texts[0]?.text}
-                  playing={true}
+                  playing
                   controls={false}
                   ref={(ref) => {
                     playersRef.current[index] = ref;
