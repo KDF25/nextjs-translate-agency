@@ -1,77 +1,77 @@
 {
     "Header": {
         "nav": {
-            "services": "Услуги",
-            "about_us": "О нас",
-            "contacts": "Контакты",
-            "clients": "Клиенты"
+            "services": "Xizmatlar",
+            "about_us": "Biz haqimizda",
+            "contacts": "Aloqa",
+            "clients": "Mijozlar"
           }
     },
     "Footer": {
         "nav": {
-            "services": "Услуги",
-            "about_us": "О нас",
-            "contacts": "Контакты",
-            "clients": "Клиенты"
+            "services": "Xizmatlar",
+            "about_us": "Biz haqimizda",
+            "contacts": "Aloqa",
+            "clients": "Mijozlar"
           },
         "contacts": {
-            "address": "г. Ташкент, Проспект Амира Тимура 99А.</br>Oриентир: м.Бодомзор.</br> Бизнес центр, 306 кабинет"
+            "address": "Toshkent sh., Amir Temur ko'chasi 99A.</br>Yo'riqnoma: Bodomzor metro bekati.</br> Biznes markaz, 306 xona"
         }
     },
     
     "HomePage" : {
         "FirstHome" : {
-            "orderButton" : "Заказать перевод",
-            "contactButton" : "Связаться с нами"
+            "orderButton" : "Buyurtma berish",
+            "contactButton" : "Aloqa"
         }, 
         "SecondHome" : {
-            "title" : "Какие услуги мы предоставляем?",
-            "orderButton" : "Заказать перевод"
+            "title" : "Biz qanday xizmatlarni taqdim etamiz?",
+            "orderButton" : "Buyurtma berish"
         }, 
         "ThirdHome" : {
-            "title": "Почему выбирают нас?",
-            "orderButton" : "Заказать перевод"
+            "title": "Nima uchun bizni tanlaydilar?",
+            "orderButton" : "Buyurtma berish"
         },
         "FourthHome": {
-            "title": "Наши услуги",
-            "subtitle": "Вот еще некоторые наши возможности:"
+            "title": "Bizning xizmatlarimiz",
+            "subtitle": "Mana yana ba'zi imkoniyatlarimiz:"
         },
 
         "FifthHome" : {
-            "title": "Заказать перевод",
-            "name": "Ваше имя*",
-            "email": "Ваш E-mail",
-            "phoneNumber": "Ваш номер телефона*",
+            "title": "Tarjima buyurtma qilish",
+            "name": "Sizning ismingiz*",
+            "email": "Sizning E-mail",
+            "phoneNumber": "Sizning telefon raqamingiz*",
             "files": {
-                "file": "Загрузите сюда любые файлы, которые необходимо рассмотреть",
-                "drag": "Перетащите файлы или",
-                "add": "Добавьте",
-                "formats": "Поддерживаемые форматы: JPEG, PNG, GIF, MP4, PDF, PSD, AI, Word, PPT"
+                "file": "Ko'rib chiqish uchun kerakli har qanday fayllarni yuklang",
+                "drag": "Fayllarni sudrab tashlang yoki",
+                "add": "Qo'shing",
+                "formats": "Formatlar: JPEG, PNG, GIF, MP4, PDF, PSD, AI, Word, PPT"
             },
-            "sendButton": "Отправить",
-          "alert": "Сообщение успешно доставлено. Спасибо за обращение!",
-            "error": "Ошибка при отправке письма. Пожалуйста, попробуйте снова."
+            "sendButton": "Yuborish",
+          "alert": "Xabar muvaffaqiyatli yuborildi. Murojaatingiz uchun rahmat!",
+            "error": "Xabar yuborishda xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring."
 
         },
 
         "SixthHome": {
-            "title": "Как c нами связаться?",
-            "address": "г. Ташкент, Проспект Амира Тимура 99А.</br>Oриентир: м.Бодомзор.</br> Бизнес центр, 306 кабинет"
+            "title": "Biz bilan qanday bog'lanish mumkin?",
+            "address": "Toshkent sh., Amir Temur ko'chasi 99A.</br>Yo'riqnoma: Bodomzor metro bekati.</br> Biznes markaz, 306 xona"
         },
 
         
         "SeventhHome": {
-            "title": "Компании, которые доверяют нашим услугам"
+            "title": "Bizning xizmatlarimizga ishonadigan kompaniyalar"
         }
 
 
     },
     "WhyPage": {
         "SecondSection": {
-             "title": "Наши возможности"
+             "title": "Bizning imkoniyatlarimiz"
         },
         "FourthSection": {
-            "title": "Среди наших проектов:"
+            "title": "Bizning loyihalarimiz orasida:"
        }
     }
 }

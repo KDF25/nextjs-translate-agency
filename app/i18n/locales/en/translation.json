@@ -1,77 +1,77 @@
 {
     "Header": {
         "nav": {
-            "services": "Услуги",
-            "about_us": "О нас",
-            "contacts": "Контакты",
-            "clients": "Клиенты"
+            "services": "Services",
+            "about_us": "About us",
+            "contacts": "Contacts",
+            "clients": "Clients"
           }
     },
     "Footer": {
         "nav": {
-            "services": "Услуги",
-            "about_us": "О нас",
-            "contacts": "Контакты",
-            "clients": "Клиенты"
+            "services": "Services",
+            "about_us": "About us",
+            "contacts": "Contacts",
+            "clients": "Clients"
           },
         "contacts": {
-            "address": "г. Ташкент, Проспект Амира Тимура 99А.</br>Oриентир: м.Бодомзор.</br> Бизнес центр, 306 кабинет"
+            "address": "Tashkent, Amir Temur Street 99A.</br>Landmark: Bodomzor metro station.</br> Business center, office 306"
         }
     },
     
     "HomePage" : {
         "FirstHome" : {
-            "orderButton" : "Заказать перевод",
-            "contactButton" : "Связаться с нами"
+            "orderButton" : "Order translation",
+            "contactButton" : "Contact us"
         }, 
         "SecondHome" : {
-            "title" : "Какие услуги мы предоставляем?",
-            "orderButton" : "Заказать перевод"
+            "title" : "What services do we offer?",
+            "orderButton" : "Order translation"
         }, 
         "ThirdHome" : {
-            "title": "Почему выбирают нас?",
-            "orderButton" : "Заказать перевод"
+            "title": "Why choose us?",
+            "orderButton" : "Order translation"
         },
         "FourthHome": {
-            "title": "Наши услуги",
-            "subtitle": "Вот еще некоторые наши возможности:"
+            "title": "Our services",
+            "subtitle": "Here are some of our other opportunities:"
         },
 
         "FifthHome" : {
-            "title": "Заказать перевод",
-            "name": "Ваше имя*",
-            "email": "Ваш E-mail",
-            "phoneNumber": "Ваш номер телефона*",
+            "title": "Order translation",
+            "name": "Your name*",
+            "email": "Your E-mail",
+            "phoneNumber": "Your phone number*",
             "files": {
-                "file": "Загрузите сюда любые файлы, которые необходимо рассмотреть",
-                "drag": "Перетащите файлы или",
-                "add": "Добавьте",
-                "formats": "Поддерживаемые форматы: JPEG, PNG, GIF, MP4, PDF, PSD, AI, Word, PPT"
+                "file": "Upload any files you need to review",
+                "drag": "Drag files or",
+                "add": "Add",
+                "formats": "Supported formats: JPEG, PNG, GIF, MP4, PDF, PSD, AI, Word, PPT"
             },
-            "sendButton": "Отправить",
-          "alert": "Сообщение успешно доставлено. Спасибо за обращение!",
-            "error": "Ошибка при отправке письма. Пожалуйста, попробуйте снова."
+            "sendButton": "Send",
+          "alert": "Message sent successfully. Thank you for contacting us!",
+            "error": "Error sending message. Please try again."
 
         },
 
         "SixthHome": {
-            "title": "Как c нами связаться?",
-            "address": "г. Ташкент, Проспект Амира Тимура 99А.</br>Oриентир: м.Бодомзор.</br> Бизнес центр, 306 кабинет"
+            "title": "How to contact us?",
+            "address": "Tashkent, Amir Temur Street 99A.</br>Landmark: Bodomzor metro station.</br> Business center, office 306"
         },
 
         
         "SeventhHome": {
-            "title": "Компании, которые доверяют нашим услугам"
+            "title": "Companies that trust our services"
         }
 
 
     },
     "WhyPage": {
         "SecondSection": {
-             "title": "Наши возможности"
+             "title": "Our opportunities"
         },
         "FourthSection": {
-            "title": "Среди наших проектов:"
+            "title": "Among our projects:"
        }
     }
 }
