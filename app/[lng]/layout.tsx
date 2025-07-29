@@ -5,6 +5,7 @@ import Head from "next/head";
 import { ReactNode } from "react";
 import { languages } from "../i18n/settings";
 import "./../styles/global.scss";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Vip-perevod",
@@ -49,9 +50,24 @@ const RootLayout: React.FC<RootLayoutProps> = ({
   return (
     <>
       <html lang={lng} dir={dir(lng)} prefix="og: http://ogp.me/ns#">
+        {/* Google Ads script */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17380143692"
+        />
+        <Script id="google-ads" strategy="afterInteractive">
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-17380143692');
+        `}
+        </Script>
+        
         <Head>
           <link rel="icon" href="/favicon.ico" />
         </Head>
+
         <body>
           <main className="main__layout">
             <div>{children}</div>
