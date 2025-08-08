@@ -52,16 +52,30 @@ const RootLayout: React.FC<RootLayoutProps> = ({
         <head>
           <link rel="icon" href="/favicon.ico" />
 
-          {/* Google Tag Manager */}
-          <Script id="google-tag-manager" strategy="afterInteractive">
-            {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-WV9ZKJ46');
-          `}
-          </Script>
+          {/* Google Tag Manager - должен быть первым */}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-WV9ZKJ46');
+              `,
+            }}
+          />
+        </head>
+
+        <body>
+          {/* Google Tag Manager (noscript) */}
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-WV9ZKJ46"
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
 
           {/* Google Analytics GA4 */}
           <Script
@@ -101,18 +115,6 @@ const RootLayout: React.FC<RootLayoutProps> = ({
             });
           `}
           </Script>
-        </head>
-
-        <body>
-          {/* Google Tag Manager (noscript) */}
-          <noscript>
-            <iframe
-              src="https://www.googletagmanager.com/ns.html?id=GTM-WV9ZKJ46"
-              height="0"
-              width="0"
-              style={{ display: "none", visibility: "hidden" }}
-            />
-          </noscript>
 
           <main className="main__layout">
             <div>{children}</div>
